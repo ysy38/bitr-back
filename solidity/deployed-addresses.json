@@ -1,0 +1,20 @@
+{
+  "network": "somnia",
+  "chainId": "50312",
+  "deployer": "0x483fc7FD690dCf2a01318282559C389F385d4428",
+  "timestamp": "2025-10-27T00:52:30.575Z",
+  "contracts": {
+    "BitredictToken": "0xfD8263CB7B270c09D589CFEAa5Ba3C5AE1C6b1AC",
+    "ReputationSystem": "0x868A0d50A12bABdAE1148807E08223EB76Dd32eb",
+    "GuidedOracle": "0x1Ef65F8F1D11829CB72E5D66038B3900d441d944",
+    "OptimisticOracle": "0xa6CE0C52Be110815F973AF68f8CEe04D2D218771",
+    "BitredictPoolCore": "0x7055e853562c7306264F3E0d50C56160C3F0d5Cf",
+    "BitredictBoostSystem": "0x54E46a1B9170C5218C953713dBB4Fd61F73bf5d2",
+    "BitredictComboPools": "0x30222540A36D838e36FA4029fAb931e0f9010CFF",
+    "BitredictPoolFactory": "0x7e686149322Ce8de0a0E047bf7590fe3fF353a98",
+    "BitredictStaking": "0x9C2d0083d733866202e6ff7d8514851Bb4715f96",
+    "Oddyssey": "0x91eAf09ea6024F88eDB26F460429CdfD52349259",
+    "BitrFaucet": "0x64C8a33f4D5938968eB51a33f62F14b514d342d7"
+  },
+  "gasUsed": {}
+}

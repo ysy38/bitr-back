@@ -1,0 +1,20 @@
+{
+  "name": "bitredict-pool-tests",
+  "version": "1.0.0",
+  "description": "Tests for BitredictPoolCore claim system",
+  "scripts": {
+    "test": "hardhat test",
+    "test:claim": "hardhat test test/PoolClaimTest.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "chai": "^4.3.7",
+    "ethers": "^6.8.0",
+    "hardhat": "^2.19.0",
+    "puppeteer": "^24.29.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}

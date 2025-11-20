@@ -1,0 +1,45 @@
+REMOVED: automated-testing-system.js - 18.38KB
+REMOVED: bulletproof-integration-service.js - 24.82KB
+REMOVED: comprehensive-results-processor.js - 6.82KB
+REMOVED: continuous-slip-evaluator.js - 4.23KB
+REMOVED: cycle-format-normalizer.js - 6.88KB
+REMOVED: data-transformation-pipeline.js - 13.78KB
+REMOVED: leaderboard-performance-monitor.js - 9.29KB
+REMOVED: match-enhancement-service.js - 6.39KB
+REMOVED: monitored-external-apis.js - 7.56KB
+REMOVED: odds-validation-framework.js - 14.44KB
+REMOVED: oracle-pool-finder.js - 8.13KB
+REMOVED: platform-analytics-service.js - 11.82KB
+REMOVED: prisma-service.js - 8.80KB
+REMOVED: redis-cache-service.js - 7.22KB
+REMOVED: sportmonks-integration.js - 9.88KB
+REMOVED: standardized-data-flow.js - 17.79KB
+REMOVED: title-templates.js - 13.19KB
+REMOVED: unified-results-storage.js - 12.04KB
+CONSOLIDATED: analytics-service.js -> enhanced-analytics-service.js - 0.29KB
+CONSOLIDATED: market-analytics-service.js -> enhanced-analytics-service.js - 11.88KB
+CONSOLIDATED: enhanced-leaderboard-service.js -> leaderboard-service.js - 9.34KB
+CONSOLIDATED: optimized-leaderboard-service.js -> leaderboard-service.js - 9.15KB
+CONSOLIDATED: bitredict-pool-service.js -> event-driven-pool-sync.js - 8.52KB
+CONSOLIDATED: enhanced-pool-sync-service.js -> event-driven-pool-sync.js - 14.58KB
+CONSOLIDATED: fixed-pool-sync-service.js -> event-driven-pool-sync.js - 12.75KB
+CONSOLIDATED: health-monitor.js -> system-monitor.js - 19.50KB
+CONSOLIDATED: comprehensive-health-service.js -> system-monitor.js - 17.96KB
+CONSOLIDATED: pool-settlement-service.js -> unified-pool-settlement-system.js - 19.80KB
+UPDATED: unified-realtime-indexer.js - analytics-service.js -> enhanced-analytics-service.js
+UPDATED: api/bitredict-pool-analytics.js - market-analytics-service.js -> enhanced-analytics-service.js
+UPDATED: scripts/verify-leaderboard-system.js - enhanced-leaderboard-service.js -> leaderboard-service.js
+UPDATED: api/leaderboard-performance.js - optimized-leaderboard-service.js -> leaderboard-service.js
+UPDATED: api/bitredict-pool.js - bitredict-pool-service.js -> event-driven-pool-sync.js
+UPDATED: api/pool-sync-status.js - enhanced-pool-sync-service.js -> event-driven-pool-sync.js
+UPDATED: scripts/verify-all-services.js - enhanced-pool-sync-service.js -> event-driven-pool-sync.js
+UPDATED: api/health.js - health-monitor.js -> system-monitor.js
+UPDATED: api/server.js - health-monitor.js -> system-monitor.js
+UPDATED: config/logging.js - health-monitor.js -> system-monitor.js
+UPDATED: db/monitored-db.js - health-monitor.js -> system-monitor.js
+UPDATED: middleware/health-monitoring-middleware.js - health-monitor.js -> system-monitor.js
+UPDATED: middleware/logging-middleware.js - health-monitor.js -> system-monitor.js
+UPDATED: scripts/initialize-health-monitoring.js - health-monitor.js -> system-monitor.js
+UPDATED: cron/health-monitoring-cron.js - comprehensive-health-service.js -> system-monitor.js
+UPDATED: cron/pool-settlement-service-process.js - pool-settlement-service.js -> unified-pool-settlement-system.js
+UPDATED: scripts/start-oracle-services.js - pool-settlement-service.js -> unified-pool-settlement-system.js

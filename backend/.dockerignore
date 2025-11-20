@@ -1,0 +1,100 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+
+# Temporary folders
+tmp/
+temp/
+
+# Logs
+logs/
+*.log
+
+# Development databases
+*.sqlite
+*.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git files
+.git/
+.gitignore
+
+# Backup files
+old-cron-backups/
+*.backup
+*.bak
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Documentation
+*.md
+docs/
+
+# Analysis files
+CRON_CLEANUP_ANALYSIS.md
+CRON_CONSOLIDATION_GUIDE.md
+DEPLOYMENT_VERIFICATION_CHECKLIST.md
+test-master-cron.js
+
+# Large media files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+
+# Cache directories
+.cache/
+.npm/
+.yarn/
+
+# Environment files (use Fly.io secrets instead)
+.env
+.env.*

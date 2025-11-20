@@ -1,0 +1,194 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  /* Primary Colors */
+  --ifm-color-primary: #22C7FF;
+  --ifm-color-primary-dark: #007BFF;
+  --ifm-color-primary-darker: #0062CC;
+  --ifm-color-primary-darkest: #004999;
+  --ifm-color-primary-light: #49D1FF;
+  --ifm-color-primary-lighter: #70DBFF;
+  --ifm-color-primary-lightest: #97E5FF;
+
+  /* Somnia Brand Colors */
+  --somnia-cyan: #22C7FF;
+  --somnia-blue: #007BFF;
+  --somnia-violet: #8C00FF;
+  --somnia-magenta: #FF0080;
+  --somnia-indigo: #3C00A5;
+
+  /* System Colors */
+  --ifm-background-color: #0A0A1A;
+  --ifm-background-surface-color: rgba(255, 255, 255, 0.03);
+  --ifm-navbar-background-color: rgba(10, 10, 26, 0.8);
+  
+  /* Text Colors */
+  --ifm-font-color-base: #E4E4FA;
+  --ifm-heading-color: #FFFFFF;
+  --ifm-color-content-secondary: #C2C2D6;
+
+  /* Border Colors */
+  --ifm-toc-border-color: rgba(255, 255, 255, 0.05);
+  
+  /* Code Colors */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.05);
+
+  /* Other */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-global-radius: 12px;
+  --ifm-global-shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Global Styles */
+body {
+  background-image: radial-gradient(circle at top left, #0C0C23, #000015);
+}
+
+.navbar {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.navbar__logo {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar__logo img {
+  height: 24px;
+  width: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+}
+
+.navbar__brand {
+  font-weight: 700;
+}
+
+.navbar__link {
+  font-weight: 500;
+}
+
+.navbar__link:hover {
+  background: linear-gradient(135deg, #22C7FF 0%, #FF0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-doc-sidebar-container {
+  background: rgba(255, 255, 255, 0.02);
+  border-right: 1px solid var(--ifm-toc-border-color) !important;
+}
+
+.table-of-contents {
+  border-left: 1px solid var(--ifm-toc-border-color);
+}
+
+.theme-doc-markdown {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.theme-doc-markdown h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #22C7FF 0%, #FF0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-doc-markdown h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.theme-doc-markdown h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.theme-code-block {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--ifm-toc-border-color) !important;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+code {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 6px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.admonition {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.footer {
+  background: transparent;
+  border-top: 1px solid var(--ifm-toc-border-color);
+}
+
+.footer__link-item:hover {
+  background: linear-gradient(135deg, #22C7FF 0%, #FF0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.menu__link {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.menu__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.menu__link--active {
+  background: linear-gradient(135deg, rgba(34, 199, 255, 0.1) 0%, rgba(255, 0, 128, 0.1) 100%);
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #22C7FF 0%, #FF0080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 3s ease infinite;
+}
