@@ -1,0 +1,23 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.featureImg {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px rgba(34, 199, 255, 0.2));
+  transition: all 0.3s ease;
+}
+
+.featureImg:hover {
+  transform: translateY(-5px);
+  filter: drop-shadow(0 0 30px rgba(34, 199, 255, 0.4));
+}

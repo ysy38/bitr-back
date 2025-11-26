@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database (for local development)
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: bitredict_db
+      POSTGRES_USER: bitredict
+      POSTGRES_PASSWORD: dev_password_123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bitredict -d bitredict_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API Service
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://bitredict:dev_password_123@postgres:5432/bitredict_db
+      PROVIDER_URL: ${PROVIDER_URL:-http://localhost:8545}
+      SPORTMONKS_API_TOKEN: ${SPORTMONKS_API_TOKEN}
+      GUIDED_ORACLE_ADDRESS: ${GUIDED_ORACLE_ADDRESS}
+      ODDYSSEY_ADDRESS: ${ODDYSSEY_ADDRESS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+      - ./bot:/app/bot
+    command: ["node", "backend/api/server.js"]
+    restart: unless-stopped
+
+  # Oracle Service (separate process)
+  oracle:
+    build: .
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://bitredict:dev_password_123@postgres:5432/bitredict_db
+      PROVIDER_URL: ${PROVIDER_URL:-http://localhost:8545}
+      SPORTMONKS_API_TOKEN: ${SPORTMONKS_API_TOKEN}
+      BOT_PRIVATE_KEY: ${BOT_PRIVATE_KEY}
+      GUIDED_ORACLE_ADDRESS: ${GUIDED_ORACLE_ADDRESS}
+      ODDYSSEY_ADDRESS: ${ODDYSSEY_ADDRESS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+      - ./bot:/app/bot
+    command: ["node", "backend/oracle/cronjob.js"]
+    restart: unless-stopped
+
+  # Event Indexer Service
+  indexer:
+    build: .
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://bitredict:dev_password_123@postgres:5432/bitredict_db
+      PROVIDER_URL: ${PROVIDER_URL:-http://localhost:8545}
+      GUIDED_ORACLE_ADDRESS: ${GUIDED_ORACLE_ADDRESS}
+      ODDYSSEY_ADDRESS: ${ODDYSSEY_ADDRESS}
+      PREDICTION_POOL_ADDRESS: ${PREDICTION_POOL_ADDRESS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app/backend
+    command: ["node", "backend/indexer.js"]
+    restart: unless-stopped
+
+volumes:
+  postgres_data: 

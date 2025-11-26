@@ -1,0 +1,2121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["airdrop", "analytics", "core", "crypto", "neon_auth", "oddyssey", "oracle", "prediction", "public", "system"]
+}
+
+model bitr_activities {
+  id               BigInt    @id @default(autoincrement())
+  user_address     String    @db.VarChar(255)
+  activity_type    String    @db.VarChar(100)
+  amount           Decimal?  @db.Decimal(78, 18)
+  pool_id          String?   @db.VarChar(255)
+  from_address     String?   @db.VarChar(255)
+  to_address       String?   @db.VarChar(255)
+  transaction_hash String    @db.VarChar(255)
+  block_number     BigInt
+  timestamp        DateTime  @db.Timestamptz(6)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([timestamp], map: "idx_bitr_activities_timestamp")
+  @@index([activity_type], map: "idx_bitr_activities_type")
+  @@index([user_address], map: "idx_bitr_activities_user")
+  @@schema("airdrop")
+}
+
+model eligibility {
+  user_address                   String    @id @db.VarChar(255)
+  has_faucet_claim               Boolean?  @default(false)
+  faucet_claim_date              DateTime? @db.Timestamptz(6)
+  has_stt_activity_before_faucet Boolean?  @default(false)
+  bitr_action_count              Int?      @default(0)
+  has_staking_activity           Boolean?  @default(false)
+  oddyssey_slip_count            Int?      @default(0)
+  has_suspicious_transfers       Boolean?  @default(false)
+  is_transfer_only_recipient     Boolean?  @default(false)
+  is_eligible                    Boolean?  @default(false)
+  snapshot_bitr_balance          Decimal?  @db.Decimal(78, 18)
+  airdrop_amount                 Decimal?  @db.Decimal(78, 18)
+  snapshot_taken_at              DateTime? @db.Timestamptz(6)
+  eligibility_updated_at         DateTime? @default(now()) @db.Timestamptz(6)
+  created_at                     DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at                     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([is_eligible], map: "idx_eligibility_eligible")
+  @@schema("airdrop")
+}
+
+model faucet_claims {
+  id               BigInt    @id @default(autoincrement())
+  user_address     String    @unique @db.VarChar(255)
+  amount           Decimal   @default(20000000000000000000000) @db.Decimal(78, 18)
+  claimed_at       DateTime  @db.Timestamptz(6)
+  block_number     BigInt
+  transaction_hash String    @unique @db.VarChar(255)
+  had_stt_activity Boolean   @default(false)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([claimed_at], map: "idx_faucet_claims_claimed_at")
+  @@index([user_address], map: "idx_faucet_claims_user")
+  @@schema("airdrop")
+}
+
+model snapshot_balances {
+  id             BigInt    @id @default(autoincrement())
+  snapshot_id    BigInt
+  user_address   String    @db.VarChar(255)
+  bitr_balance   Decimal   @db.Decimal(78, 18)
+  airdrop_amount Decimal?  @db.Decimal(78, 18)
+  is_eligible    Boolean?  @default(true)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  snapshots      snapshots @relation(fields: [snapshot_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([snapshot_id, user_address])
+  @@index([snapshot_id], map: "idx_snapshot_balances_snapshot")
+  @@index([user_address], map: "idx_snapshot_balances_user")
+  @@schema("airdrop")
+}
+
+model snapshots {
+  id                     BigInt              @id @default(autoincrement())
+  snapshot_name          String              @unique @db.VarChar(255)
+  snapshot_block         BigInt
+  snapshot_timestamp     DateTime            @db.Timestamptz(6)
+  total_eligible_wallets Int?                @default(0)
+  total_eligible_bitr    Decimal?            @default(0) @db.Decimal(78, 18)
+  created_at             DateTime?           @default(now()) @db.Timestamptz(6)
+  snapshot_balances      snapshot_balances[]
+
+  @@schema("airdrop")
+}
+
+model staking_activities {
+  id               BigInt    @id @default(autoincrement())
+  user_address     String    @db.VarChar(255)
+  action_type      String    @db.VarChar(100)
+  amount           Decimal?  @db.Decimal(78, 18)
+  tier_id          Int?
+  duration_option  Int?
+  transaction_hash String    @db.VarChar(255)
+  block_number     BigInt
+  timestamp        DateTime  @db.Timestamptz(6)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([user_address], map: "idx_staking_activities_user")
+  @@schema("airdrop")
+}
+
+model statistics {
+  metric_name  String    @id @db.VarChar(255)
+  metric_value Decimal?  @default(0) @db.Decimal
+  description  String?
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("airdrop")
+}
+
+model summary_stats {
+  id           BigInt    @id @default(autoincrement())
+  metric_name  String    @unique @db.VarChar(255)
+  metric_value Decimal?  @default(0) @db.Decimal
+  description  String?
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("airdrop")
+}
+
+model transfer_patterns {
+  id               BigInt    @id @default(autoincrement())
+  from_address     String    @db.VarChar(255)
+  to_address       String    @db.VarChar(255)
+  amount           Decimal   @db.Decimal(78, 18)
+  transaction_hash String    @db.VarChar(255)
+  block_number     BigInt
+  timestamp        DateTime  @db.Timestamptz(6)
+  is_suspicious    Boolean?  @default(false)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([from_address], map: "idx_transfer_patterns_from")
+  @@index([to_address], map: "idx_transfer_patterns_to")
+  @@schema("airdrop")
+}
+
+model bitr_rewards {
+  id           BigInt    @id @default(autoincrement())
+  user_address String    @db.VarChar(42)
+  reward_type  String    @db.VarChar(50)
+  amount       Decimal   @db.Decimal(78, 18)
+  reason       String?
+  pool_id      String?   @db.VarChar(50)
+  challenge_id BigInt?
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([reward_type], map: "idx_bitr_rewards_type")
+  @@index([user_address], map: "idx_bitr_rewards_user_address")
+  @@schema("analytics")
+}
+
+model category_stats {
+  id           BigInt    @id @default(autoincrement())
+  category     String    @db.VarChar(100)
+  date         DateTime  @db.Date
+  total_pools  Int?      @default(0)
+  total_volume Decimal?  @default(0) @db.Decimal(78, 18)
+  avg_odds     Decimal?  @default(0) @db.Decimal(10, 6)
+  win_rate     Decimal?  @default(0) @db.Decimal(5, 2)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([category, date])
+  @@index([category, date], map: "idx_category_stats_category_date")
+  @@index([date], map: "idx_category_stats_date")
+  @@schema("analytics")
+}
+
+model daily_stats {
+  id           BigInt    @id @default(autoincrement())
+  date         DateTime  @unique @db.Date
+  total_users  Int?      @default(0)
+  total_pools  Int?      @default(0)
+  total_bets   Int?      @default(0)
+  total_volume Decimal?  @default(0) @db.Decimal(78, 18)
+  active_users Int?      @default(0)
+  new_users    Int?      @default(0)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([date], map: "idx_daily_stats_date")
+  @@schema("analytics")
+}
+
+model hourly_activity {
+  id            BigInt    @id @default(autoincrement())
+  date_hour     DateTime  @unique @db.Timestamptz(6)
+  active_users  Int?      @default(0)
+  total_actions Int?      @default(0)
+  pools_created Int?      @default(0)
+  bets_placed   Int?      @default(0)
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([date_hour], map: "idx_hourly_activity_date_hour")
+  @@index([date_hour], map: "idx_hourly_activity_hour")
+  @@schema("analytics")
+}
+
+model market_analytics {
+  id            BigInt    @id @default(autoincrement())
+  fixture_id    String    @db.VarChar(50)
+  market_type   String    @db.VarChar(50)
+  total_bets    Int?      @default(0)
+  home_bets     Int?      @default(0)
+  draw_bets     Int?      @default(0)
+  away_bets     Int?      @default(0)
+  over_bets     Int?      @default(0)
+  under_bets    Int?      @default(0)
+  btts_yes_bets Int?      @default(0)
+  btts_no_bets  Int?      @default(0)
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime? @default(now()) @db.Timestamptz(6)
+  fixtures      fixtures  @relation(fields: [fixture_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([fixture_id], map: "idx_market_analytics_fixture_id")
+  @@schema("analytics")
+}
+
+model pool_challenge_scores {
+  id               BigInt    @id @default(autoincrement())
+  pool_id          String    @db.VarChar(50)
+  user_address     String    @db.VarChar(42)
+  challenge_score  Decimal?  @default(0) @db.Decimal(10, 2)
+  difficulty_level Int?      @default(1)
+  completed_at     DateTime? @db.Timestamptz(6)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([pool_id, user_address])
+  @@index([pool_id], map: "idx_pool_challenge_scores_pool")
+  @@index([user_address], map: "idx_pool_challenge_scores_user")
+  @@schema("analytics")
+}
+
+model analytics_pools {
+  pool_id                  String    @id @db.VarChar(50)
+  creator_address          String    @db.VarChar(42)
+  odds                     Int?
+  is_settled               Boolean?  @default(false)
+  creator_side_won         Boolean?
+  is_private               Boolean?  @default(false)
+  uses_bitr                Boolean?  @default(false)
+  oracle_type              String?   @db.VarChar(50)
+  market_id                String?   @db.VarChar(50)
+  predicted_outcome        String?   @db.VarChar(50)
+  actual_result            String?   @db.VarChar(50)
+  creator_stake            Decimal   @db.Decimal(78, 18)
+  total_creator_side_stake Decimal   @db.Decimal(78, 18)
+  total_bettor_stake       Decimal?  @default(0) @db.Decimal(78, 18)
+  max_bettor_stake         Decimal?  @db.Decimal(78, 18)
+  event_start_time         DateTime? @db.Timestamptz(6)
+  event_end_time           DateTime? @db.Timestamptz(6)
+  betting_end_time         DateTime? @db.Timestamptz(6)
+  created_at               DateTime? @default(now()) @db.Timestamptz(6)
+  settled_at               DateTime? @db.Timestamptz(6)
+  category                 String?   @db.VarChar(100)
+  league                   String?   @db.VarChar(100)
+  region                   String?   @db.VarChar(100)
+
+  @@index([created_at], map: "idx_pools_created_at")
+  @@index([creator_address], map: "idx_pools_creator_address")
+  @@index([is_settled], map: "idx_pools_settled")
+  @@map("pools")
+  @@schema("analytics")
+}
+
+model staking_events {
+  id               BigInt    @id @default(autoincrement())
+  user_address     String    @db.VarChar(42)
+  event_type       String    @db.VarChar(50)
+  amount           Decimal   @db.Decimal(78, 18)
+  transaction_hash String    @unique @db.VarChar(66)
+  block_number     BigInt
+  timestamp        DateTime  @db.Timestamptz(6)
+  additional_data  Json?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([timestamp], map: "idx_staking_events_timestamp")
+  @@index([user_address], map: "idx_staking_events_user_address")
+  @@index([user_address], map: "idx_staking_events_user")
+  @@schema("analytics")
+}
+
+model user_analytics {
+  id           BigInt    @id @default(autoincrement())
+  user_address String    @db.VarChar(42)
+  total_bets   Int?      @default(0)
+  winning_bets Int?      @default(0)
+  total_staked Decimal?  @default(0) @db.Decimal(18, 6)
+  total_won    Decimal?  @default(0) @db.Decimal(18, 6)
+  win_rate     Decimal?  @default(0) @db.Decimal(5, 2)
+  avg_odds     Decimal?  @default(0) @db.Decimal(10, 6)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([user_address], map: "idx_user_analytics_user_address")
+  @@schema("analytics")
+}
+
+model user_social_stats {
+  id                       BigInt    @id @default(autoincrement())
+  user_address             String    @unique @db.VarChar(42)
+  total_comments           Int?      @default(0)
+  total_discussions        Int?      @default(0)
+  total_replies            Int?      @default(0)
+  total_reactions_given    Int?      @default(0)
+  total_reactions_received Int?      @default(0)
+  total_reflections        Int?      @default(0)
+  social_score             Int?      @default(0)
+  created_at               DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at               DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("analytics")
+}
+
+model achievements {
+  id                   BigInt     @id @default(autoincrement())
+  user_address         String     @db.VarChar(42)
+  achievement_type     String     @db.VarChar(100)
+  achievement_value    Decimal    @db.Decimal(78, 18)
+  achievement_category String?    @db.VarChar(100)
+  unlocked_at          DateTime   @db.Timestamptz(6)
+  block_number         BigInt
+  transaction_hash     String     @db.VarChar(66)
+  created_at           DateTime?  @default(now()) @db.Timestamptz(6)
+  users                core_users @relation(fields: [user_address], references: [address], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([user_address], map: "idx_achievements_user_address")
+  @@schema("core")
+}
+
+model community_discussions {
+  id                 BigInt               @id @default(autoincrement())
+  user_address       String               @db.VarChar(42)
+  title              String               @db.VarChar(255)
+  content            String
+  category           String?              @db.VarChar(100)
+  is_deleted         Boolean?             @default(false)
+  created_at         DateTime?            @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime?            @default(now()) @db.Timestamptz(6)
+  discussion_replies discussion_replies[]
+
+  @@index([category], map: "idx_community_discussions_category")
+  @@index([user_address], map: "idx_community_discussions_user_address")
+  @@schema("core")
+}
+
+model discussion_replies {
+  id                       BigInt                @id @default(autoincrement())
+  discussion_id            BigInt
+  user_address             String                @db.VarChar(42)
+  content                  String
+  parent_reply_id          BigInt?
+  is_deleted               Boolean?              @default(false)
+  created_at               DateTime?             @default(now()) @db.Timestamptz(6)
+  updated_at               DateTime?             @default(now()) @db.Timestamptz(6)
+  community_discussions    community_discussions @relation(fields: [discussion_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  discussion_replies       discussion_replies?   @relation("discussion_repliesTodiscussion_replies", fields: [parent_reply_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  other_discussion_replies discussion_replies[]  @relation("discussion_repliesTodiscussion_replies")
+
+  @@index([discussion_id], map: "idx_discussion_replies_discussion_id")
+  @@schema("core")
+}
+
+model pool_comments {
+  id                  BigInt          @id @default(autoincrement())
+  pool_id             String          @db.VarChar(50)
+  user_address        String          @db.VarChar(42)
+  comment_text        String
+  parent_comment_id   BigInt?
+  is_deleted          Boolean?        @default(false)
+  created_at          DateTime?       @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime?       @default(now()) @db.Timestamptz(6)
+  pool_comments       pool_comments?  @relation("pool_commentsTopool_comments", fields: [parent_comment_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  other_pool_comments pool_comments[] @relation("pool_commentsTopool_comments")
+
+  @@index([pool_id], map: "idx_pool_comments_pool_id")
+  @@index([user_address], map: "idx_pool_comments_user_address")
+  @@schema("core")
+}
+
+model pool_creation_notifications {
+  id                BigInt    @id @default(autoincrement())
+  pool_id           String    @db.VarChar(50)
+  creator_address   String    @db.VarChar(42)
+  notification_type String    @db.VarChar(50)
+  message           String?
+  is_read           Boolean?  @default(false)
+  created_at        DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("core")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model pool_reflections {
+  id               BigInt    @id @default(autoincrement())
+  pool_id          String    @db.VarChar(50)
+  user_address     String    @db.VarChar(42)
+  reflection_text  String
+  confidence_level Int?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([pool_id], map: "idx_pool_reflections_pool_id")
+  @@schema("core")
+}
+
+model reputation_actions {
+  id               BigInt     @id @default(autoincrement())
+  user_address     String     @db.VarChar(42)
+  action_type      Int
+  reputation_delta Int
+  associated_value String?    @db.VarChar(255)
+  pool_id          String?    @db.VarChar(255)
+  timestamp        DateTime   @db.Timestamptz(6)
+  block_number     BigInt
+  transaction_hash String     @db.VarChar(66)
+  created_at       DateTime?  @default(now()) @db.Timestamptz(6)
+  users            core_users @relation(fields: [user_address], references: [address], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([timestamp], map: "idx_reputation_actions_timestamp")
+  @@index([user_address], map: "idx_reputation_actions_user_address")
+  @@schema("core")
+}
+
+model reputation_log {
+  id           BigInt    @id @default(autoincrement())
+  user_address String    @db.VarChar(42)
+  action       String    @db.VarChar(100)
+  points       Int
+  ref_type     String?   @db.VarChar(50)
+  ref_id       String?   @db.VarChar(50)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([user_address], map: "idx_reputation_log_user_address")
+  @@schema("core")
+}
+
+model social_reactions {
+  id            BigInt    @id @default(autoincrement())
+  user_address  String    @db.VarChar(42)
+  target_type   String    @db.VarChar(50)
+  target_id     BigInt
+  reaction_type String    @db.VarChar(20)
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([user_address, target_type, target_id])
+  @@index([target_type, target_id], map: "idx_social_reactions_target")
+  @@index([user_address], map: "idx_social_reactions_user")
+  @@schema("core")
+}
+
+model user_badges {
+  id             BigInt    @id @default(autoincrement())
+  user_address   String    @db.VarChar(255)
+  badge_type     String    @db.VarChar(50)
+  badge_category String    @db.VarChar(20)
+  title          String    @db.VarChar(100)
+  description    String?
+  icon_name      String?   @db.VarChar(50)
+  rarity         String?   @db.VarChar(20)
+  criteria_met   Json?
+  earned_at      DateTime? @default(now()) @db.Timestamptz(6)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([user_address, badge_type])
+  @@schema("core")
+}
+
+model core_users {
+  address             String               @id @db.VarChar(42)
+  reputation          Int?                 @default(40)
+  total_volume        Decimal?             @default(0) @db.Decimal(78, 18)
+  profit_loss         Decimal?             @default(0) @db.Decimal(78, 18)
+  total_bets          Int?                 @default(0)
+  won_bets            Int?                 @default(0)
+  current_streak      Int?                 @default(0)
+  max_win_streak      Int?                 @default(0)
+  max_loss_streak     Int?                 @default(0)
+  streak_is_win       Boolean?             @default(true)
+  biggest_win         Decimal?             @default(0) @db.Decimal(78, 18)
+  biggest_loss        Decimal?             @default(0) @db.Decimal(78, 18)
+  favorite_category   String?              @db.VarChar(100)
+  total_pools_created Int?                 @default(0)
+  pools_won           Int?                 @default(0)
+  avg_bet_size        Decimal?             @default(0) @db.Decimal(78, 18)
+  risk_score          Int?                 @default(500)
+  joined_at           DateTime?            @default(now()) @db.Timestamptz(6)
+  last_active         DateTime?            @default(now()) @db.Timestamptz(6)
+  achievements        achievements[]
+  reputation_actions  reputation_actions[]
+  predictions         predictions[]
+  transactions        transactions[]
+
+  @@index([address], map: "idx_users_address")
+  @@map("users")
+  @@schema("core")
+}
+
+model crypto_crypto_coins {
+  id               String    @id @db.VarChar(50)
+  symbol           String    @unique @db.VarChar(20)
+  name             String    @db.VarChar(100)
+  price_usd        Decimal?  @db.Decimal(20, 8)
+  market_cap_usd   Decimal?  @db.Decimal(20, 2)
+  volume_24h_usd   Decimal?  @db.Decimal(20, 2)
+  price_change_24h Decimal?  @db.Decimal(10, 4)
+  market_cap_rank  Int?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("crypto_coins")
+  @@schema("crypto")
+}
+
+model cycle_status {
+  id                 BigInt    @id @default(autoincrement())
+  cycle_id           BigInt    @unique
+  status             String    @db.VarChar(50)
+  start_time         DateTime? @db.Timestamptz(6)
+  end_time           DateTime? @db.Timestamptz(6)
+  total_participants Int?      @default(0)
+  total_entries      Int?      @default(0)
+  prize_pool         Decimal?  @default(0) @db.Decimal(18, 6)
+  metadata           Json?
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oddyssey")
+}
+
+model daily_games {
+  game_date        DateTime      @id @db.Date
+  entry_fee        Decimal?      @default(0.01) @db.Decimal(18, 6)
+  max_participants Int?          @default(1000)
+  total_prize_pool Decimal?      @default(0) @db.Decimal(18, 6)
+  status           String?       @default("active") @db.VarChar(50)
+  created_at       DateTime?     @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime?     @default(now()) @db.Timestamptz(6)
+  game_results     game_results?
+
+  @@schema("oddyssey")
+}
+
+model game_results {
+  id                 BigInt      @id @default(autoincrement())
+  game_date          DateTime    @unique @db.Date
+  total_participants Int?        @default(0)
+  total_slips        Int?        @default(0)
+  winners            Json?
+  prize_pool         Decimal?    @default(0) @db.Decimal(18, 6)
+  is_finalized       Boolean?    @default(false)
+  finalized_at       DateTime?   @db.Timestamptz(6)
+  created_at         DateTime?   @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime?   @default(now()) @db.Timestamptz(6)
+  daily_games        daily_games @relation(fields: [game_date], references: [game_date], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("oddyssey")
+}
+
+model oddyssey_slip_selections {
+  id              BigInt    @id @default(autoincrement())
+  slip_id         String    @db.VarChar(50)
+  fixture_id      String    @db.VarChar(50)
+  selection_type  String    @db.VarChar(50)
+  selection_value String    @db.VarChar(10)
+  odds            Decimal?  @db.Decimal(10, 6)
+  result          String?   @db.VarChar(10)
+  created_at      DateTime? @default(now()) @db.Timestamptz(6)
+  fixtures        fixtures  @relation(fields: [fixture_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("oddyssey")
+}
+
+model slip_entries {
+  id               BigInt    @id @default(autoincrement())
+  slip_id          BigInt
+  match_id         Int
+  bet_type         String    @db.VarChar(50)
+  selected_outcome String    @db.VarChar(50)
+  selected_odd     Decimal   @db.Decimal(10, 4)
+  is_correct       Boolean?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  slips            slips     @relation(fields: [slip_id], references: [slip_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("oddyssey")
+}
+
+model slips {
+  slip_id       BigInt         @id @default(autoincrement())
+  user_address  String         @db.VarChar(42)
+  game_date     DateTime       @db.Date
+  total_odds    Decimal        @db.Decimal(10, 4)
+  is_evaluated  Boolean?       @default(false)
+  correct_count Int?
+  final_score   Int?
+  created_at    DateTime?      @default(now()) @db.Timestamptz(6)
+  slip_entries  slip_entries[]
+
+  @@index([game_date], map: "idx_slips_game_date")
+  @@index([user_address], map: "idx_slips_user_address")
+  @@schema("oddyssey")
+}
+
+model active_crypto_markets {
+  market_id      String    @id @db.VarChar(100)
+  coinpaprika_id String    @db.VarChar(50)
+  target_price   Decimal   @db.Decimal(20, 8)
+  direction      String    @db.VarChar(10)
+  timeframe      String    @db.VarChar(10)
+  start_price    Decimal   @db.Decimal(20, 8)
+  start_time     DateTime  @db.Timestamptz(6)
+  end_time       DateTime  @db.Timestamptz(6)
+  resolved       Boolean?  @default(false)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([resolved], map: "idx_active_crypto_markets_resolved")
+  @@schema("oracle")
+}
+
+model bookmakers {
+  id          String    @id @db.VarChar(50)
+  name        String    @db.VarChar(255)
+  logo_url    String?
+  website_url String?
+  is_active   Boolean?  @default(true)
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([is_active], map: "idx_bookmakers_active")
+  @@index([name], map: "idx_bookmakers_name")
+  @@schema("oracle")
+}
+
+model coins {
+  id               String    @id @db.VarChar(50)
+  symbol           String    @unique @db.VarChar(20)
+  name             String    @db.VarChar(100)
+  price_usd        Decimal?  @db.Decimal(20, 8)
+  market_cap_usd   Decimal?  @db.Decimal(20, 2)
+  volume_24h_usd   Decimal?  @db.Decimal(20, 2)
+  price_change_24h Decimal?  @db.Decimal(10, 4)
+  market_cap_rank  Int?
+  coinpaprika_id   String?   @unique @db.VarChar(50)
+  logo_url         String?
+  whitepaper_url   String?
+  website_url      String?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([coinpaprika_id], map: "idx_coins_coinpaprika_id")
+  @@index([symbol], map: "idx_coins_symbol")
+  @@schema("oracle")
+}
+
+model countries {
+  id            String    @id @db.VarChar(50)
+  continent_id  String?   @db.VarChar(50)
+  name          String    @db.VarChar(255)
+  official_name String?   @db.VarChar(255)
+  fifa_name     String?   @db.VarChar(10)
+  iso2          String?   @db.VarChar(10)
+  iso3          String?   @db.VarChar(10)
+  latitude      Decimal?  @db.Decimal(10, 8)
+  longitude     Decimal?  @db.Decimal(11, 8)
+  image_path    String?
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([iso2], map: "idx_countries_iso2")
+  @@index([name], map: "idx_countries_name")
+  @@schema("oracle")
+}
+
+model oracle_crypto_coins {
+  coinpaprika_id String    @id @db.VarChar(50)
+  symbol         String    @db.VarChar(20)
+  name           String    @db.VarChar(100)
+  is_active      Boolean?  @default(true)
+  is_popular     Boolean?  @default(false)
+  rank           Int?
+  logo_url       String?
+  whitepaper_url String?
+  website_url    String?
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("crypto_coins")
+  @@schema("oracle")
+}
+
+model crypto_market_stats {
+  id                   BigInt    @id @default(autoincrement())
+  coinpaprika_id       String    @db.VarChar(50)
+  date                 DateTime  @db.Date
+  avg_price            Decimal?  @db.Decimal(20, 8)
+  min_price            Decimal?  @db.Decimal(20, 8)
+  max_price            Decimal?  @db.Decimal(20, 8)
+  volatility           Decimal?  @db.Decimal(10, 4)
+  volume_24h           Decimal?  @db.Decimal(20, 2)
+  market_cap           Decimal?  @db.Decimal(20, 2)
+  price_movement_score Decimal?  @db.Decimal(10, 4)
+  created_at           DateTime? @default(now()) @db.Timestamptz(6)
+  predictions_created  Int?      @default(0)
+  predictions_resolved Int?      @default(0)
+  predictions_won      Int?      @default(0)
+
+  @@unique([coinpaprika_id, date])
+  @@index([coinpaprika_id, date], map: "idx_crypto_market_stats_coin_date")
+  @@index([date], map: "idx_crypto_market_stats_date")
+  @@schema("oracle")
+}
+
+model crypto_prediction_markets {
+  id             BigInt    @id @default(autoincrement())
+  market_id      String    @unique @db.VarChar(100)
+  coinpaprika_id String    @db.VarChar(50)
+  target_price   Decimal   @db.Decimal(20, 8)
+  direction      String    @db.VarChar(10)
+  timeframe      String    @db.VarChar(10)
+  start_price    Decimal   @db.Decimal(20, 8)
+  start_time     DateTime  @db.Timestamptz(6)
+  end_time       DateTime  @db.Timestamptz(6)
+  resolved       Boolean?  @default(false)
+  final_price    Decimal?  @db.Decimal(20, 8)
+  result         String?   @db.VarChar(10)
+  resolved_at    DateTime? @db.Timestamptz(6)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([coinpaprika_id], map: "idx_crypto_prediction_markets_coin")
+  @@index([end_time], map: "idx_crypto_prediction_markets_end_time")
+  @@index([resolved], map: "idx_crypto_prediction_markets_resolved")
+  @@schema("oracle")
+}
+
+model crypto_price_snapshots {
+  id                 BigInt    @id @default(autoincrement())
+  coinpaprika_id     String    @db.VarChar(50)
+  price_usd          Decimal   @db.Decimal(20, 8)
+  market_cap         Decimal?  @db.Decimal(20, 2)
+  volume_24h         Decimal?  @db.Decimal(20, 2)
+  circulating_supply Decimal?  @db.Decimal(20, 2)
+  total_supply       Decimal?  @db.Decimal(20, 2)
+  max_supply         Decimal?  @db.Decimal(20, 2)
+  percent_change_1h  Decimal?  @db.Decimal(10, 4)
+  percent_change_24h Decimal?  @db.Decimal(10, 4)
+  percent_change_7d  Decimal?  @db.Decimal(10, 4)
+  ath_price          Decimal?  @db.Decimal(20, 8)
+  ath_date           DateTime? @db.Timestamptz(6)
+  beta_value         Decimal?  @db.Decimal(10, 6)
+  last_updated       DateTime? @db.Timestamptz(6)
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([coinpaprika_id], map: "idx_crypto_price_snapshots_coin")
+  @@index([coinpaprika_id, created_at], map: "idx_crypto_price_snapshots_coin_time")
+  @@index([created_at], map: "idx_crypto_price_snapshots_time")
+  @@schema("oracle")
+}
+
+model crypto_resolution_logs {
+  id                  BigInt    @id @default(autoincrement())
+  market_id           String    @db.VarChar(100)
+  coinpaprika_id      String    @db.VarChar(50)
+  predicted_direction String    @db.VarChar(10)
+  actual_result       String?   @db.VarChar(10)
+  success             Boolean?
+  error_message       String?
+  processing_time_ms  Int?
+  created_at          DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([market_id], map: "idx_crypto_resolution_logs_market")
+  @@index([created_at], map: "idx_crypto_resolution_logs_time")
+  @@schema("oracle")
+}
+
+model current_oddyssey_cycle {
+  cycle_id               BigInt    @id
+  created_at             DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at             DateTime? @default(now()) @db.Timestamptz(6)
+  matches_count          Int       @default(10)
+  matches_data           Json
+  cycle_start_time       DateTime? @db.Timestamptz(6)
+  cycle_end_time         DateTime? @db.Timestamptz(6)
+  resolved_at            DateTime? @db.Timestamptz(6)
+  is_resolved            Boolean?  @default(false)
+  tx_hash                String?
+  resolution_tx_hash     String?
+  resolution_data        Json?
+  ready_for_resolution   Boolean?  @default(false)
+  resolution_prepared_at DateTime? @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model oracle_daily_game_matches {
+  id             BigInt    @id @default(autoincrement())
+  fixture_id     BigInt
+  home_team      String
+  away_team      String
+  league_name    String
+  match_date     DateTime  @db.Timestamptz(6)
+  game_date      DateTime  @db.Date
+  home_odds      Decimal   @db.Decimal(10, 2)
+  draw_odds      Decimal   @db.Decimal(10, 2)
+  away_odds      Decimal   @db.Decimal(10, 2)
+  over_25_odds   Decimal   @db.Decimal(10, 2)
+  under_25_odds  Decimal   @db.Decimal(10, 2)
+  selection_type String?   @default("1x2_ou25")
+  priority_score Int?      @default(0)
+  cycle_id       BigInt?
+  display_order  Int
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([fixture_id, cycle_id], map: "unique_fixture_cycle")
+  @@index([cycle_id], map: "idx_daily_game_matches_cycle_id")
+  @@index([game_date], map: "idx_daily_game_matches_game_date")
+  @@map("daily_game_matches")
+  @@schema("oracle")
+}
+
+model fixture_odds {
+  id                      String    @id @db.VarChar(50)
+  fixture_id              String    @db.VarChar(50)
+  market_id               String?   @db.VarChar(50)
+  bookmaker_id            String?   @db.VarChar(50)
+  label                   String?   @db.VarChar(100)
+  value                   Decimal?  @db.Decimal(10, 6)
+  name                    String?   @db.VarChar(100)
+  sort_order              Int?
+  market_description      String?   @db.VarChar(255)
+  probability             String?   @db.VarChar(20)
+  dp3                     String?   @db.VarChar(20)
+  fractional              String?   @db.VarChar(20)
+  american                String?   @db.VarChar(20)
+  winning                 Boolean?  @default(false)
+  stopped                 Boolean?  @default(false)
+  total                   Decimal?  @db.Decimal(10, 6)
+  handicap                Decimal?  @db.Decimal(10, 6)
+  participants            Json?
+  created_at              DateTime? @default(now()) @db.Timestamptz(6)
+  original_label          String?   @db.VarChar(100)
+  latest_bookmaker_update DateTime? @db.Timestamptz(6)
+  bookmaker               Json?
+  bookmaker_name          String?   @db.VarChar(100)
+  bookmaker_logo          String?
+  updated_at              DateTime? @default(now()) @db.Timestamptz(6)
+  fixtures                fixtures  @relation(fields: [fixture_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([fixture_id], map: "idx_fixture_odds_fixture_id")
+  @@index([label], map: "idx_fixture_odds_label")
+  @@index([market_id], map: "idx_fixture_odds_market_id")
+  @@schema("oracle")
+}
+
+model fixture_results {
+  id                   String    @db.VarChar(50)
+  home_score           Int?
+  away_score           Int?
+  ht_home_score        Int?
+  ht_away_score        Int?
+  result_1x2           String?   @db.VarChar(10)
+  result_ou05          String?   @db.VarChar(10)
+  result_ou15          String?   @db.VarChar(10)
+  result_ou25          String?   @db.VarChar(10)
+  result_ou35          String?   @db.VarChar(10)
+  result_ou45          String?   @db.VarChar(10)
+  result_btts          String?   @db.VarChar(10)
+  result_ht            String?   @db.VarChar(10)
+  result_ht_ou05       String?   @db.VarChar(10)
+  result_ht_ou15       String?   @db.VarChar(10)
+  result_ht_goals      Int?
+  outcome_1x2          String?   @db.VarChar(10)
+  final_price          Decimal?  @db.Decimal(10, 6)
+  finished_at          DateTime? @db.Timestamptz(6)
+  evaluation_status    String?   @default("pending") @db.VarChar(20)
+  evaluation_timestamp DateTime? @db.Timestamptz(6)
+  evaluator            String?   @default("auto") @db.VarChar(50)
+  confidence_score     Decimal?  @default(100.0) @db.Decimal(5, 2)
+  created_at           DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at           DateTime? @default(now()) @db.Timestamptz(6)
+  outcome_ou05         String?   @db.VarChar(10)
+  outcome_ou15         String?   @db.VarChar(10)
+  outcome_ou25         String?   @db.VarChar(10)
+  outcome_ou35         String?   @db.VarChar(10)
+  outcome_ht_result    String?   @db.VarChar(10)
+  outcome_btts         String?   @db.VarChar(10)
+  full_score           String?   @db.VarChar(20)
+  ht_score             String?   @db.VarChar(20)
+  outcome_ou45         String?   @db.VarChar(10)
+  fixture_id           BigInt    @id
+
+  @@schema("oracle")
+}
+
+model fixtures {
+  id                          String                        @id @db.VarChar(50)
+  name                        String                        @db.VarChar(500)
+  home_team_id                String?                       @db.VarChar(50)
+  away_team_id                String?                       @db.VarChar(50)
+  home_team                   String                        @db.VarChar(255)
+  away_team                   String                        @db.VarChar(255)
+  league_id                   String?                       @db.VarChar(50)
+  league_name                 String?                       @db.VarChar(255)
+  season_id                   String?                       @db.VarChar(50)
+  round_id                    String?                       @db.VarChar(50)
+  round                       String?                       @db.VarChar(100)
+  match_date                  DateTime                      @db.Timestamptz(6)
+  starting_at                 DateTime?                     @db.Timestamptz(6)
+  status                      String?                       @db.VarChar(100)
+  venue                       Json?
+  referee                     String?                       @db.VarChar(255)
+  league                      Json?
+  season                      Json?
+  stage                       Json?
+  round_obj                   Json?
+  state                       Json?
+  participants                Json?
+  metadata                    Json?
+  referee_id                  String?                       @db.VarChar(50)
+  referee_name                String?                       @db.VarChar(255)
+  referee_image_path          String?
+  venue_capacity              Int?
+  venue_coordinates           String?                       @db.VarChar(100)
+  venue_surface               String?                       @db.VarChar(50)
+  venue_image_path            String?
+  home_team_image_path        String?
+  away_team_image_path        String?
+  league_image_path           String?
+  country_image_path          String?
+  created_at                  DateTime?                     @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime?                     @default(now()) @db.Timestamptz(6)
+  venue_id                    String?                       @db.VarChar(50)
+  state_id                    String?                       @db.VarChar(50)
+  result_info                 Json?
+  leg                         Int?
+  team_assignment_validated   Boolean?                      @default(false)
+  odds_mapping_validated      Boolean?                      @default(false)
+  processing_errors           Json?                         @default("{}")
+  country                     String?                       @db.VarChar(100)
+  country_code                String?                       @db.VarChar(10)
+  market_analytics            market_analytics[]
+  oddyssey_slip_selections    oddyssey_slip_selections[]
+  fixture_odds                fixture_odds[]
+  football_prediction_markets football_prediction_markets[]
+  oracle_submissions          oracle_submissions[]
+  predictions                 predictions[]
+
+  @@index([league_id], map: "idx_fixtures_league_id")
+  @@index([match_date], map: "idx_fixtures_match_date")
+  @@index([status], map: "idx_fixtures_status")
+  @@schema("oracle")
+}
+
+model football_market_stats {
+  id                     BigInt    @id @default(autoincrement())
+  outcome_type           String    @db.VarChar(50)
+  date                   DateTime  @db.Date
+  total_markets          Int?      @default(0)
+  resolved_markets       Int?      @default(0)
+  home_wins              Int?      @default(0)
+  draw_results           Int?      @default(0)
+  away_wins              Int?      @default(0)
+  over_results           Int?      @default(0)
+  under_results          Int?      @default(0)
+  btts_yes               Int?      @default(0)
+  btts_no                Int?      @default(0)
+  avg_resolution_time_ms Int?
+  created_at             DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([outcome_type, date])
+  @@index([date], map: "idx_football_market_stats_date")
+  @@index([outcome_type, date], map: "idx_football_market_stats_outcome_date")
+  @@schema("oracle")
+}
+
+model football_prediction_markets {
+  id                String    @id @db.VarChar(50)
+  fixture_id        String    @db.VarChar(50)
+  market_type       String    @db.VarChar(50)
+  home_odds         Decimal?  @db.Decimal(10, 6)
+  draw_odds         Decimal?  @db.Decimal(10, 6)
+  away_odds         Decimal?  @db.Decimal(10, 6)
+  ht_home_odds      Decimal?  @db.Decimal(10, 6)
+  ht_draw_odds      Decimal?  @db.Decimal(10, 6)
+  ht_away_odds      Decimal?  @db.Decimal(10, 6)
+  over_05_odds      Decimal?  @db.Decimal(10, 6)
+  under_05_odds     Decimal?  @db.Decimal(10, 6)
+  over_15_odds      Decimal?  @db.Decimal(10, 6)
+  under_15_odds     Decimal?  @db.Decimal(10, 6)
+  over_25_odds      Decimal?  @db.Decimal(10, 6)
+  under_25_odds     Decimal?  @db.Decimal(10, 6)
+  over_35_odds      Decimal?  @db.Decimal(10, 6)
+  under_35_odds     Decimal?  @db.Decimal(10, 6)
+  over_45_odds      Decimal?  @db.Decimal(10, 6)
+  under_45_odds     Decimal?  @db.Decimal(10, 6)
+  ht_over_05_odds   Decimal?  @db.Decimal(10, 6)
+  ht_under_05_odds  Decimal?  @db.Decimal(10, 6)
+  ht_over_15_odds   Decimal?  @db.Decimal(10, 6)
+  ht_under_15_odds  Decimal?  @db.Decimal(10, 6)
+  btts_yes_odds     Decimal?  @db.Decimal(10, 6)
+  btts_no_odds      Decimal?  @db.Decimal(10, 6)
+  over_odds         Decimal?  @db.Decimal(10, 6)
+  under_odds        Decimal?  @db.Decimal(10, 6)
+  status            String?   @default("active") @db.VarChar(50)
+  created_at        DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime? @default(now()) @db.Timestamptz(6)
+  market_id         String?   @unique @db.VarChar(100)
+  outcome_type      String?   @db.VarChar(50)
+  predicted_outcome String?   @db.VarChar(50)
+  end_time          DateTime? @db.Timestamptz(6)
+  resolved          Boolean?  @default(false)
+  result            String?   @db.VarChar(50)
+  resolved_at       DateTime? @db.Timestamptz(6)
+  pool_id           String?   @db.VarChar(50)
+  fixtures          fixtures  @relation(fields: [fixture_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("oracle")
+}
+
+model football_resolution_logs {
+  id                 BigInt    @id @default(autoincrement())
+  market_id          String    @db.VarChar(100)
+  fixture_id         String    @db.VarChar(50)
+  outcome_type       String    @db.VarChar(50)
+  predicted_outcome  String    @db.VarChar(50)
+  actual_result      String?   @db.VarChar(50)
+  success            Boolean?
+  error_message      String?
+  processing_time_ms Int?
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([fixture_id], map: "idx_football_resolution_logs_fixture")
+  @@index([market_id], map: "idx_football_resolution_logs_market")
+  @@index([created_at], map: "idx_football_resolution_logs_time")
+  @@schema("oracle")
+}
+
+model oracle_leagues {
+  league_id          String    @id @db.VarChar(50)
+  name               String    @db.VarChar(255)
+  country            String?   @db.VarChar(100)
+  country_code       String?   @db.VarChar(10)
+  logo_url           String?
+  season_id          String?   @db.VarChar(50)
+  is_popular         Boolean?  @default(false)
+  image_path         String?
+  country_image_path String?
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime? @default(now()) @db.Timestamptz(6)
+  seasons            seasons[]
+
+  @@map("leagues")
+  @@schema("oracle")
+}
+
+model match_results {
+  id                String         @id @db.VarChar(50)
+  match_id          String         @unique(map: "match_results_match_id_unique") @db.VarChar(50)
+  home_score        Int?
+  away_score        Int?
+  ht_home_score     Int?
+  ht_away_score     Int?
+  result            String?        @db.VarChar(10)
+  created_at        DateTime?      @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime?      @default(now()) @db.Timestamptz(6)
+  outcome_1x2       String?        @db.VarChar(10)
+  outcome_ou05      String?        @db.VarChar(10)
+  outcome_ou15      String?        @db.VarChar(10)
+  outcome_ou25      String?        @db.VarChar(10)
+  outcome_ou35      String?        @db.VarChar(10)
+  outcome_ht_result String?        @db.VarChar(10)
+  outcome_btts      String?        @db.VarChar(10)
+  full_score        String?        @db.VarChar(20)
+  ht_score          String?        @db.VarChar(20)
+  state_id          String?        @db.VarChar(50)
+  result_info       Json?
+  finished_at       DateTime?      @db.Timestamptz(6)
+  resolved_at       DateTime?      @db.Timestamptz(6)
+  matches           oracle_matches @relation(fields: [match_id], references: [match_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("oracle")
+}
+
+model oracle_matches {
+  match_id      String         @id @db.VarChar(50)
+  home_team     String         @db.VarChar(255)
+  away_team     String         @db.VarChar(255)
+  match_time    DateTime       @db.Timestamptz(6)
+  league        String?        @db.VarChar(255)
+  status        String?        @default("pending") @db.VarChar(50)
+  home_score    Int?
+  away_score    Int?
+  ht_home_score Int?
+  ht_away_score Int?
+  created_at    DateTime?      @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime?      @default(now()) @db.Timestamptz(6)
+  match_results match_results?
+
+  @@index([match_time], map: "idx_matches_match_time")
+  @@map("matches")
+  @@schema("oracle")
+}
+
+model oracle_oddyssey_cycles {
+  cycle_id                BigInt    @id
+  created_at              DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime? @default(now()) @db.Timestamptz(6)
+  matches_count           Int       @default(10)
+  matches_data            Json
+  cycle_start_time        DateTime? @db.Timestamptz(6)
+  cycle_end_time          DateTime? @db.Timestamptz(6)
+  is_resolved             Boolean?  @default(false)
+  resolved_at             DateTime? @db.Timestamptz(6)
+  tx_hash                 String?
+  resolution_tx_hash      String?
+  resolution_data         Json?
+  ready_for_resolution    Boolean?  @default(false)
+  resolution_prepared_at  DateTime? @db.Timestamptz(6)
+  start_time              DateTime? @db.Timestamptz(6)
+  end_time                DateTime? @db.Timestamptz(6)
+  prize_pool              Decimal?  @default(0) @db.Decimal
+  evaluation_completed    Boolean?  @default(false)
+  evaluation_completed_at DateTime? @db.Timestamptz(6)
+
+  @@index([created_at], map: "idx_oddyssey_cycles_created_at")
+  @@index([is_resolved], map: "idx_oddyssey_cycles_resolved")
+  @@map("oddyssey_cycles")
+  @@schema("oracle")
+}
+
+model oddyssey_prize_claims {
+  id             BigInt    @id @default(autoincrement())
+  cycle_id       BigInt
+  player_address String    @db.VarChar(42)
+  rank           Int
+  amount         Decimal   @db.Decimal(78, 18)
+  claimed_at     DateTime? @default(now()) @db.Timestamptz(6)
+  tx_hash        String?   @db.VarChar(66)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([cycle_id], map: "idx_oddyssey_prize_claims_cycle")
+  @@schema("oracle")
+}
+
+model oracle_oddyssey_slips {
+  slip_id           BigInt    @id
+  cycle_id          BigInt
+  player_address    String
+  placed_at         DateTime? @default(now()) @db.Timestamptz(6)
+  predictions       Json
+  final_score       Decimal?  @default(0) @db.Decimal
+  correct_count     Int?      @default(0)
+  is_evaluated      Boolean?  @default(false)
+  leaderboard_rank  Int?
+  prize_claimed     Boolean?  @default(false)
+  tx_hash           String?
+  transaction_hash  String?
+  creator_address   String?
+  category          String?   @default("oddyssey")
+  uses_bitr         Boolean?  @default(false)
+  creator_stake     Decimal?  @default(0) @db.Decimal(18, 6)
+  odds              Decimal?  @default(1) @db.Decimal(10, 6)
+  pool_id           BigInt?
+  notification_type String?   @default("slip_placed")
+  message           String?   @default("Your Oddyssey slip has been placed successfully")
+  is_read           Boolean?  @default(false)
+  evaluation_data   Json?     @default("{}")
+
+  @@index([cycle_id], map: "idx_oddyssey_slips_cycle_id")
+  @@index([player_address], map: "idx_oddyssey_slips_player")
+  @@index([category], map: "idx_oddyssey_slips_category")
+  @@index([placed_at], map: "idx_oddyssey_slips_created_at")
+  @@index([creator_address], map: "idx_oddyssey_slips_creator_address")
+  @@index([transaction_hash], map: "idx_oddyssey_slips_transaction_hash")
+  @@index([cycle_id, player_address], map: "idx_oddyssey_slips_cycle_player")
+  @@index([player_address, placed_at(sort: Desc)], map: "idx_oddyssey_slips_player_placed")
+  @@map("oddyssey_slips")
+  @@schema("oracle")
+}
+
+model oddyssey_user_preferences {
+  id            BigInt    @id @default(autoincrement())
+  user_address  String    @unique @db.VarChar(42)
+  auto_evaluate Boolean?  @default(true)
+  auto_claim    Boolean?  @default(true)
+  notifications Boolean?  @default(true)
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([user_address], map: "idx_oddyssey_user_preferences_user")
+  @@schema("oracle")
+}
+
+model oddyssey_user_stats {
+  id                BigInt    @id @default(autoincrement())
+  user_address      String    @unique @db.VarChar(42)
+  total_slips       Int?      @default(0)
+  total_wins        Int?      @default(0)
+  best_score        Decimal?  @default(0) @db.Decimal(10, 2)
+  win_rate          Decimal?  @default(0) @db.Decimal(5, 2)
+  created_at        DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime? @default(now()) @db.Timestamptz(6)
+  current_streak    Int?      @default(0)
+  best_streak       Int?      @default(0)
+  last_active_cycle BigInt?
+  block_number      BigInt?
+  transaction_hash  String?
+
+  @@index([user_address], map: "idx_oddyssey_user_stats_user")
+  @@schema("oracle")
+}
+
+model pending_crypto_resolutions {
+  market_id      String    @id @db.VarChar(100)
+  coinpaprika_id String    @db.VarChar(50)
+  target_price   Decimal   @db.Decimal(20, 8)
+  direction      String    @db.VarChar(10)
+  end_time       DateTime  @db.Timestamptz(6)
+  current_price  Decimal?  @db.Decimal(20, 8)
+  is_resolvable  Boolean?  @default(false)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([end_time], map: "idx_pending_crypto_resolutions_end_time")
+  @@schema("oracle")
+}
+
+model referees {
+  id            String    @id @db.VarChar(50)
+  sport_id      String?   @db.VarChar(50)
+  country_id    String?   @db.VarChar(50)
+  city_id       String?   @db.VarChar(50)
+  common_name   String?   @db.VarChar(255)
+  firstname     String?   @db.VarChar(255)
+  lastname      String?   @db.VarChar(255)
+  name          String?   @db.VarChar(255)
+  display_name  String?   @db.VarChar(255)
+  image_path    String?
+  height        Int?
+  weight        Int?
+  date_of_birth DateTime? @db.Date
+  gender        String?   @db.VarChar(10)
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([country_id], map: "idx_referees_country")
+  @@index([name], map: "idx_referees_name")
+  @@schema("oracle")
+}
+
+model venues {
+  id          String    @id @db.VarChar(50)
+  country_id  String?   @db.VarChar(50)
+  city_id     String?   @db.VarChar(50)
+  name        String    @db.VarChar(255)
+  address     String?
+  city        String?   @db.VarChar(255)
+  capacity    Int?
+  image_path  String?
+  coordinates String?   @db.VarChar(100)
+  surface     String?   @db.VarChar(50)
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([capacity], map: "idx_venues_capacity")
+  @@index([city], map: "idx_venues_city")
+  @@index([name], map: "idx_venues_name")
+  @@schema("oracle")
+}
+
+model bets {
+  bet_id             String           @id @db.VarChar(50)
+  pool_id            String           @db.VarChar(50)
+  user_address       String           @db.VarChar(42)
+  bet_amount         Decimal          @db.Decimal(78, 18)
+  bet_side           String           @db.VarChar(10)
+  odds_at_bet        Int
+  potential_winnings Decimal          @db.Decimal(78, 18)
+  is_winner          Boolean?
+  is_settled         Boolean?         @default(false)
+  settled_at         DateTime?        @db.Timestamptz(6)
+  created_at         DateTime?        @default(now()) @db.Timestamptz(6)
+  pools              prediction_pools @relation(fields: [pool_id], references: [pool_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([created_at], map: "idx_prediction_bets_created_at")
+  @@index([pool_id], map: "idx_prediction_bets_pool_id")
+  @@index([user_address], map: "idx_prediction_bets_user_address")
+  @@schema("prediction")
+}
+
+model prediction_pools {
+  pool_id                  String    @id @db.VarChar(50)
+  creator_address          String    @db.VarChar(42)
+  odds                     Int
+  is_settled               Boolean?  @default(false)
+  creator_side_won         Boolean?
+  is_private               Boolean?  @default(false)
+  uses_bitr                Boolean?  @default(false)
+  oracle_type              String?   @db.VarChar(50)
+  market_id                String?   @db.VarChar(50)
+  predicted_outcome        String?   @db.VarChar(50)
+  actual_result            String?   @db.VarChar(50)
+  creator_stake            Decimal   @db.Decimal(78, 18)
+  total_creator_side_stake Decimal   @db.Decimal(78, 18)
+  total_bettor_stake       Decimal?  @default(0) @db.Decimal(78, 18)
+  max_bettor_stake         Decimal?  @db.Decimal(78, 18)
+  event_start_time         DateTime? @db.Timestamptz(6)
+  event_end_time           DateTime? @db.Timestamptz(6)
+  betting_end_time         DateTime? @db.Timestamptz(6)
+  creation_time            DateTime? @default(now()) @db.Timestamptz(6)
+  created_at               DateTime? @default(now()) @db.Timestamptz(6)
+  settled_at               DateTime? @db.Timestamptz(6)
+  bets                     bets[]
+
+  @@index([created_at], map: "idx_prediction_pools_created_at")
+  @@index([creator_address], map: "idx_prediction_pools_creator")
+  @@index([is_settled], map: "idx_prediction_pools_settled")
+  @@map("pools")
+  @@schema("prediction")
+}
+
+model betting_cycles {
+  id         Int       @id @default(autoincrement())
+  cycle_id   String    @unique @db.VarChar(255)
+  start_time DateTime  @db.Timestamptz(6)
+  end_time   DateTime  @db.Timestamptz(6)
+  status     String?   @default("active") @db.VarChar(50)
+  total_pool Decimal?  @default(0) @db.Decimal(20, 8)
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([cycle_id], map: "idx_betting_cycles_cycle_id")
+  @@index([status], map: "idx_betting_cycles_status")
+  @@schema("public")
+}
+
+model public_leagues {
+  id         Int       @id @default(autoincrement())
+  league_id  String    @unique @db.VarChar(255)
+  name       String    @db.VarChar(255)
+  country    String?   @db.VarChar(255)
+  logo       String?   @db.VarChar(500)
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([league_id], map: "idx_leagues_league_id")
+  @@map("leagues")
+  @@schema("public")
+}
+
+model public_matches {
+  id          Int       @id @default(autoincrement())
+  match_id    String    @unique @db.VarChar(255)
+  home_team   String    @db.VarChar(255)
+  away_team   String    @db.VarChar(255)
+  home_score  Int?
+  away_score  Int?
+  status      String?   @default("scheduled") @db.VarChar(50)
+  start_time  DateTime? @db.Timestamptz(6)
+  end_time    DateTime? @db.Timestamptz(6)
+  league_id   String?   @db.VarChar(255)
+  league_name String?   @db.VarChar(255)
+  season_id   String?   @db.VarChar(255)
+  season_name String?   @db.VarChar(255)
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([match_id], map: "idx_matches_match_id")
+  @@index([start_time], map: "idx_matches_start_time")
+  @@index([status], map: "idx_matches_status")
+  @@map("matches")
+  @@schema("public")
+}
+
+model oracle_submissions {
+  id             Int       @id @default(autoincrement())
+  match_id       String    @db.VarChar(255)
+  oracle_address String    @db.VarChar(255)
+  outcome_data   Json
+  submitted_at   DateTime? @default(now()) @db.Timestamptz(6)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  fixtures       fixtures  @relation(fields: [match_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([match_id], map: "idx_oracle_submissions_match_id")
+  @@schema("public")
+}
+
+model predictions {
+  id               Int        @id @default(autoincrement())
+  match_id         String     @db.VarChar(255)
+  user_address     String     @db.VarChar(255)
+  prediction_type  String     @db.VarChar(50)
+  prediction_value String     @db.VarChar(255)
+  amount           Decimal    @db.Decimal(20, 8)
+  odds             Decimal    @db.Decimal(10, 4)
+  status           String?    @default("pending") @db.VarChar(50)
+  created_at       DateTime?  @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime?  @default(now()) @db.Timestamptz(6)
+  resolved_at      DateTime?  @db.Timestamptz(6)
+  fixtures         fixtures   @relation(fields: [match_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users            core_users @relation(fields: [user_address], references: [address], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([match_id], map: "idx_predictions_match_id")
+  @@index([status], map: "idx_predictions_status")
+  @@index([user_address], map: "idx_predictions_user_address")
+  @@schema("public")
+}
+
+model seasons {
+  id         Int            @id @default(autoincrement())
+  season_id  String         @unique @db.VarChar(255)
+  name       String         @db.VarChar(255)
+  league_id  String         @db.VarChar(255)
+  start_date DateTime?      @db.Date
+  end_date   DateTime?      @db.Date
+  created_at DateTime?      @default(now()) @db.Timestamptz(6)
+  updated_at DateTime?      @default(now()) @db.Timestamptz(6)
+  leagues    oracle_leagues @relation(fields: [league_id], references: [league_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([league_id], map: "idx_seasons_league_id")
+  @@index([season_id], map: "idx_seasons_season_id")
+  @@schema("public")
+}
+
+model teams {
+  id         Int       @id @default(autoincrement())
+  team_id    String    @unique @db.VarChar(255)
+  name       String    @db.VarChar(255)
+  short_name String?   @db.VarChar(50)
+  logo       String?   @db.VarChar(500)
+  country    String?   @db.VarChar(255)
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([team_id], map: "idx_teams_team_id")
+  @@schema("public")
+}
+
+model transactions {
+  id               Int        @id @default(autoincrement())
+  user_address     String     @db.VarChar(255)
+  transaction_hash String     @unique @db.VarChar(255)
+  type             String     @db.VarChar(50)
+  amount           Decimal    @db.Decimal(20, 8)
+  status           String?    @default("pending") @db.VarChar(50)
+  block_number     BigInt?
+  created_at       DateTime?  @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime?  @default(now()) @db.Timestamptz(6)
+  users            core_users @relation(fields: [user_address], references: [address], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([transaction_hash], map: "idx_transactions_hash")
+  @@index([user_address], map: "idx_transactions_user_address")
+  @@schema("public")
+}
+
+model public_users {
+  id           Int       @id @default(autoincrement())
+  address      String    @unique @db.VarChar(255)
+  username     String?   @db.VarChar(255)
+  email        String?   @db.VarChar(255)
+  balance      Decimal?  @default(0) @db.Decimal(20, 8)
+  total_bets   Int?      @default(0)
+  total_wins   Int?      @default(0)
+  total_losses Int?      @default(0)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([address], map: "idx_users_address")
+  @@map("users")
+  @@schema("public")
+}
+
+model config {
+  key         String    @id @db.VarChar(100)
+  value       String?
+  description String?
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("system")
+}
+
+model cron_execution_log {
+  id            BigInt    @id @default(autoincrement())
+  job_name      String    @db.VarChar(100)
+  execution_id  String    @db.VarChar(50)
+  status        String    @db.VarChar(20)
+  started_at    DateTime? @default(now()) @db.Timestamptz(6)
+  completed_at  DateTime? @db.Timestamptz(6)
+  duration_ms   Int?
+  metadata      Json?
+  error_message String?
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([job_name, started_at(sort: Desc)], map: "idx_cron_execution_log_job_started")
+  @@index([status], map: "idx_cron_execution_log_status")
+  @@schema("system")
+}
+
+model cron_locks {
+  job_name     String    @id @db.VarChar(100)
+  locked_at    DateTime  @default(now()) @db.Timestamp(6)
+  locked_by    String    @db.VarChar(255)
+  expires_at   DateTime  @db.Timestamp(6)
+  execution_id String?   @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  metadata     Json?     @default("{}")
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
+
+  @@schema("system")
+}
+
+model health_checks {
+  id               BigInt    @id @default(autoincrement())
+  timestamp        DateTime  @db.Timestamptz(6)
+  overall_status   String    @db.VarChar(20)
+  check_duration   Int
+  services_data    Json
+  performance_data Json
+  alerts_data      Json?     @default("[]")
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([timestamp(sort: Desc)], map: "idx_health_checks_timestamp")
+  @@schema("system")
+}
+
+model logs {
+  id         BigInt    @id @default(autoincrement())
+  level      String    @db.VarChar(20)
+  message    String
+  context    Json?
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("system")
+}
+
+model performance_metrics {
+  id           BigInt    @id @default(autoincrement())
+  timestamp    DateTime  @db.Timestamptz(6)
+  metric_name  String    @db.VarChar(100)
+  metric_value Decimal   @db.Decimal(10, 2)
+  metric_unit  String?   @db.VarChar(20)
+  service_name String?   @db.VarChar(100)
+  context_data Json?     @default("{}")
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([timestamp(sort: Desc), service_name], map: "idx_performance_metrics_timestamp_service")
+  @@schema("system")
+}
+
+model analytics_crypto_daily {
+  id               BigInt    @id @default(autoincrement())
+  date             DateTime  @unique @db.Date
+  total_markets    Int?      @default(0)
+  resolved_markets Int?      @default(0)
+  active_markets   Int?      @default(0)
+  total_volume     Decimal?  @default(0) @db.Decimal
+  avg_volume       Decimal?  @default(0) @db.Decimal
+  unique_coins     Int?      @default(0)
+  price_snapshots  Int?      @default(0)
+  tracked_coins    Int?      @default(0)
+  avg_price        Decimal?  @default(0) @db.Decimal
+  max_price        Decimal?  @default(0) @db.Decimal
+  min_price        Decimal?  @default(0) @db.Decimal
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model analytics_football_daily {
+  id                 BigInt    @id @default(autoincrement())
+  date               DateTime  @unique @db.Date
+  total_fixtures     Int?      @default(0)
+  completed_matches  Int?      @default(0)
+  upcoming_matches   Int?      @default(0)
+  live_matches       Int?      @default(0)
+  unique_leagues     Int?      @default(0)
+  unique_teams       Int?      @default(0)
+  total_markets      Int?      @default(0)
+  resolved_markets   Int?      @default(0)
+  active_markets     Int?      @default(0)
+  total_volume       Decimal?  @default(0) @db.Decimal
+  avg_volume         Decimal?  @default(0) @db.Decimal
+  total_odds         Int?      @default(0)
+  fixtures_with_odds Int?      @default(0)
+  unique_markets     Int?      @default(0)
+  avg_odds           Decimal?  @default(0) @db.Decimal
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model analytics_odyssey_daily {
+  id                      BigInt    @id @default(autoincrement())
+  date                    DateTime  @unique @db.Date
+  total_cycles            Int?      @default(0)
+  resolved_cycles         Int?      @default(0)
+  active_cycles           Int?      @default(0)
+  total_prize_pools       Decimal?  @default(0) @db.Decimal
+  avg_prize_pool          Decimal?  @default(0) @db.Decimal
+  total_slips             Int?      @default(0)
+  unique_players          Int?      @default(0)
+  avg_correct_predictions Decimal?  @default(0) @db.Decimal
+  max_correct_predictions Int?      @default(0)
+  evaluated_slips         Int?      @default(0)
+  claimed_prizes          Int?      @default(0)
+  active_users            Int?      @default(0)
+  avg_accuracy            Decimal?  @default(0) @db.Decimal
+  best_accuracy           Decimal?  @default(0) @db.Decimal
+  total_claims            Int?      @default(0)
+  total_prizes_claimed    Decimal?  @default(0) @db.Decimal
+  avg_prize_amount        Decimal?  @default(0) @db.Decimal
+  unique_winners          Int?      @default(0)
+  created_at              DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model analytics_platform_overview {
+  id            Int       @id @default(1)
+  overview_data Json?
+  growth_data   Json?
+  timestamp     DateTime? @default(now()) @db.Timestamptz(6)
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model oracle_analytics_pools {
+  id                 BigInt    @id @default(autoincrement())
+  pool_id            String    @unique @db.VarChar(255)
+  creator_address    String    @db.VarChar(42)
+  event_start_time   DateTime? @db.Timestamptz(6)
+  event_end_time     DateTime? @db.Timestamptz(6)
+  oracle_type        String?   @default("GUIDED") @db.VarChar(50)
+  market_id          String?   @db.VarChar(255)
+  creation_time      DateTime? @default(now()) @db.Timestamptz(6)
+  is_settled         Boolean?  @default(false)
+  creator_side_won   Boolean?
+  actual_result      String?
+  settled_at         DateTime? @db.Timestamptz(6)
+  total_bettor_stake Decimal?  @default(0) @db.Decimal
+  participant_count  Int?      @default(0)
+  category           String?   @db.VarChar(100)
+  total_volume       Decimal?  @default(0) @db.Decimal
+  fill_percentage    Int?      @default(0)
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("analytics_pools")
+  @@schema("oracle")
+}
+
+model analytics_user_activity_daily {
+  id                        BigInt    @id @default(autoincrement())
+  date                      DateTime  @unique @db.Date
+  active_users              Int?      @default(0)
+  total_actions             Int?      @default(0)
+  evaluated_slips           Int?      @default(0)
+  users_with_stats          Int?      @default(0)
+  avg_accuracy              Decimal?  @default(0) @db.Decimal
+  best_accuracy             Decimal?  @default(0) @db.Decimal
+  total_slips_placed        Int?      @default(0)
+  total_correct_predictions Int?      @default(0)
+  new_users                 Int?      @default(0)
+  created_at                DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at                DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model blockchain_events {
+  id               Int       @id @default(autoincrement())
+  block_number     BigInt
+  transaction_hash String
+  log_index        Int
+  event_type       String
+  contract_address String
+  event_data       Json?
+  processed_at     DateTime? @default(now()) @db.Timestamptz(6)
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([block_number, transaction_hash, log_index, event_type], map: "idx_blockchain_events_unique")
+  @@index([block_number], map: "idx_blockchain_events_block_number")
+  @@index([contract_address], map: "idx_blockchain_events_contract_address")
+  @@index([event_type], map: "idx_blockchain_events_event_type")
+  @@index([transaction_hash], map: "idx_blockchain_events_transaction_hash")
+  @@index([block_number], map: "idx_blockchain_events_block")
+  @@index([transaction_hash], map: "idx_blockchain_events_tx")
+  @@schema("oracle")
+}
+
+model cron_job_logs {
+  id                Int       @id @default(autoincrement())
+  job_name          String    @db.VarChar(100)
+  success           Boolean
+  execution_time_ms Int?
+  error_message     String?
+  executed_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model oddyssey_cumulative_stats {
+  id                          BigInt    @id @default(autoincrement())
+  user_address                String    @unique @db.VarChar(42)
+  total_slips                 Int?      @default(0)
+  total_correct_predictions   Int?      @default(0)
+  total_predictions           Int?      @default(0)
+  overall_accuracy_percentage Decimal?  @default(0) @db.Decimal(5, 2)
+  best_cycle_accuracy         Decimal?  @default(0) @db.Decimal(5, 2)
+  best_cycle_id               BigInt?
+  total_prizes_won            Decimal?  @default(0) @db.Decimal
+  cycles_participated         Int?      @default(0)
+  created_at                  DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model oddyssey_user_analytics {
+  id                  BigInt    @id @default(autoincrement())
+  user_address        String    @db.VarChar(42)
+  cycle_id            BigInt
+  slips_count         Int?      @default(0)
+  correct_predictions Int?      @default(0)
+  total_predictions   Int?      @default(0)
+  accuracy_percentage Decimal?  @default(0) @db.Decimal(5, 2)
+  created_at          DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([user_address, cycle_id])
+  @@schema("oracle")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model pool_bets {
+  bet_id          Int       @id @default(autoincrement())
+  pool_id         BigInt
+  user_address    String    @db.VarChar(42)
+  amount          BigInt
+  tx_hash         String?   @db.VarChar(66)
+  created_at      DateTime? @default(now()) @db.Timestamp(6)
+  is_creator_side Boolean   @default(false)
+  block_number    BigInt?
+  pools           pools     @relation(fields: [pool_id], references: [pool_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([created_at], map: "idx_pool_bets_created_at")
+  @@index([pool_id], map: "idx_pool_bets_pool_id")
+  @@index([user_address], map: "idx_pool_bets_user")
+  @@schema("oracle")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model pools {
+  pool_id                  BigInt      @id
+  creator_address          String      @db.VarChar(42)
+  predicted_outcome        String
+  odds                     BigInt
+  creator_stake            Decimal     @db.Decimal
+  total_stake              Decimal?    @default(0) @db.Decimal(78, 0)
+  event_start_time         BigInt
+  event_end_time           BigInt
+  league                   String?     @db.VarChar(100)
+  category                 String?     @db.VarChar(50)
+  region                   String?     @db.VarChar(50)
+  is_private               Boolean?    @default(false)
+  max_bet_per_user         Decimal?    @default(0) @db.Decimal
+  use_bitr                 Boolean?    @default(false)
+  oracle_type              Int?        @default(0)
+  market_id                String?
+  status                   String?     @default("active") @db.VarChar(20)
+  outcome                  String?
+  tx_hash                  String?     @db.VarChar(66)
+  block_number             BigInt?
+  settlement_tx_hash       String?     @db.VarChar(66)
+  created_at               DateTime?   @default(now()) @db.Timestamp(6)
+  settled_at               DateTime?   @db.Timestamp(6)
+  updated_at               DateTime?   @default(now()) @db.Timestamp(6)
+  total_creator_side_stake Decimal?    @db.Decimal(78, 0)
+  max_bettor_stake         Decimal?    @db.Decimal(78, 0)
+  total_bettor_stake       Decimal?    @default(0) @db.Decimal(78, 0)
+  creator_side_won         Boolean?
+  betting_end_time         BigInt?
+  arbitration_deadline     BigInt?
+  filled_above_60          Boolean?    @default(false)
+  result                   String?
+  result_timestamp         BigInt?
+  refund_reason            String?
+  refunded_at              DateTime?   @db.Timestamp(6)
+  fixture_id               String?     @db.VarChar(50)
+  home_team                String?
+  away_team                String?
+  readable_outcome         String?
+  market_type              String?
+  title                    String?
+  boost_tier               String?     @default("NONE")
+  boost_expiry             DateTime?   @db.Timestamptz(6)
+  participant_count        Int?        @default(0)
+  fill_percentage          Decimal?    @default(0) @db.Decimal(5, 2)
+  total_volume             Decimal?    @default(0) @db.Decimal(78, 0)
+  bet_count                Int?        @default(0)
+  avg_bet_size             Decimal?    @default(0) @db.Decimal(78, 0)
+  creator_reputation       Int?        @default(0)
+  category_rank            Int?        @default(0)
+  is_hot                   Boolean?    @default(false)
+  last_activity            DateTime?   @default(now()) @db.Timestamptz(6)
+  trending                 Boolean?    @default(false)
+  social_stats             Json?       @default("{\"likes\": 0, \"views\": 0, \"comments\": 0}")
+  change_24h               Decimal?    @default(0) @db.Decimal(10, 2)
+  binary_selection         String?
+  pool_bets                pool_bets[]
+
+  @@index([created_at], map: "idx_pools_created_at")
+  @@index([creator_address], map: "idx_pools_creator")
+  @@index([status], map: "idx_pools_status")
+  @@index([boost_tier], map: "idx_pools_boost_tier")
+  @@index([category], map: "idx_pools_category")
+  @@index([category, status], map: "idx_pools_category_status")
+  @@index([creator_address], map: "idx_pools_creator_address")
+  @@index([creator_reputation(sort: Desc)], map: "idx_pools_creator_reputation")
+  @@index([fill_percentage(sort: Desc)], map: "idx_pools_fill_percentage")
+  @@index([fixture_id], map: "idx_pools_fixture_id")
+  @@index([is_hot, created_at(sort: Desc)], map: "idx_pools_hot")
+  @@index([last_activity(sort: Desc)], map: "idx_pools_last_activity")
+  @@index([market_id], map: "idx_pools_market_id")
+  @@index([market_type], map: "idx_pools_market_type")
+  @@index([odds], map: "idx_pools_odds")
+  @@index([readable_outcome], map: "idx_pools_readable_outcome")
+  @@index([home_team, away_team], map: "idx_pools_teams")
+  @@index([total_volume(sort: Desc)], map: "idx_pools_total_volume")
+  @@index([trending, created_at(sort: Desc)], map: "idx_pools_trending")
+  @@index([use_bitr], map: "idx_pools_use_bitr")
+  @@schema("oracle")
+}
+
+model results_fetching_logs {
+  id                 Int       @id @default(autoincrement())
+  operation_type     String    @db.VarChar(50)
+  fixture_count      Int?
+  success            Boolean
+  processing_time_ms Int?
+  error_message      String?
+  created_at         DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model slip_evaluation_jobs {
+  id              Int       @id @default(autoincrement())
+  cycle_id        BigInt
+  status          String    @default("pending")
+  total_slips     Int?      @default(0)
+  processed_slips Int?      @default(0)
+  failed_slips    Int?      @default(0)
+  started_at      DateTime? @db.Timestamptz(6)
+  completed_at    DateTime? @db.Timestamptz(6)
+  error_message   String?
+  created_at      DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([cycle_id], map: "idx_slip_evaluation_jobs_cycle_id")
+  @@index([status], map: "idx_slip_evaluation_jobs_status")
+  @@schema("oracle")
+}
+
+model system_alerts {
+  id              Int       @id @default(autoincrement())
+  health_check_id String    @db.VarChar(100)
+  alert_type      String    @db.VarChar(50)
+  severity        String    @db.VarChar(20)
+  message         String
+  resolved        Boolean?  @default(false)
+  created_at      DateTime? @default(now()) @db.Timestamptz(6)
+  resolved_at     DateTime? @db.Timestamptz(6)
+
+  @@schema("oracle")
+}
+
+model oddyssey_events {
+  id               Int       @id @default(autoincrement())
+  event_type       String
+  block_number     BigInt
+  transaction_hash String
+  event_data       Json?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([transaction_hash, event_type], map: "idx_oddyssey_events_unique")
+  @@index([block_number], map: "idx_oddyssey_events_block_number")
+  @@index([event_type], map: "idx_oddyssey_events_event_type")
+  @@index([transaction_hash], map: "idx_oddyssey_events_transaction_hash")
+  @@map("events")
+  @@schema("oddyssey")
+}
+
+model oracle_combo_pools {
+  combo_pool_id            BigInt    @id
+  creator_address          String
+  creator_stake            BigInt
+  total_creator_side_stake BigInt
+  max_bettor_stake         BigInt
+  total_bettor_stake       BigInt?   @default(0)
+  total_odds               Int
+  settled                  Boolean?  @default(false)
+  creator_side_won         Boolean?
+  uses_bitr                Boolean
+  event_start_time         BigInt
+  event_end_time           BigInt
+  betting_end_time         BigInt
+  result_timestamp         BigInt?
+  category                 String?
+  max_bet_per_user         BigInt?
+  tx_hash                  String?
+  block_number             BigInt?
+  created_at               DateTime? @default(now()) @db.Timestamptz(6)
+  settled_at               DateTime? @db.Timestamptz(6)
+
+  @@map("combo_pools")
+  @@schema("oracle")
+}
+
+model oracle_fixture_mappings {
+  id                Int       @id @default(autoincrement())
+  market_id_hash    String    @unique @db.VarChar(66)
+  fixture_id        String    @db.VarChar(50)
+  home_team         String?   @db.VarChar(255)
+  away_team         String?   @db.VarChar(255)
+  league_name       String?   @db.VarChar(255)
+  created_at        DateTime? @default(now()) @db.Timestamp(6)
+  predicted_outcome String?   @db.VarChar(255)
+  readable_outcome  String?
+  market_type       String?
+  odds_decimal      Decimal?  @db.Decimal
+  creator_stake_wei Decimal?  @db.Decimal
+  payment_token     String?
+  use_bitr          Boolean?
+  description       String?
+  user_position     String?
+  match_date        DateTime? @db.Timestamp(6)
+  binary_selection  String?
+
+  @@index([fixture_id], map: "idx_fixture_mappings_fixture_id")
+  @@index([home_team, away_team], map: "idx_fixture_mappings_home_away")
+  @@index([market_id_hash], map: "idx_fixture_mappings_market_id")
+  @@map("fixture_mappings")
+  @@schema("oracle")
+}
+
+model oracle_indexed_blocks {
+  block_number BigInt    @id
+  indexed_at   DateTime? @default(now()) @db.Timestamp(6)
+
+  @@index([block_number], map: "idx_indexed_blocks_number")
+  @@map("indexed_blocks")
+  @@schema("oracle")
+}
+
+model oracle_indexer_state {
+  id                   Int       @id @default(autoincrement())
+  last_indexed_block   BigInt    @default(0)
+  last_processed_block BigInt    @default(0)
+  is_processing        Boolean?  @default(false)
+  total_blocks         BigInt?   @default(0)
+  total_events         BigInt?   @default(0)
+  start_time           DateTime? @default(now()) @db.Timestamp(6)
+  updated_at           DateTime? @default(now()) @db.Timestamp(6)
+
+  @@map("indexer_state")
+  @@schema("oracle")
+}
+
+model oracle_monitoring_alerts {
+  id         Int       @id @default(autoincrement())
+  alert_type String    @db.VarChar(50)
+  severity   String    @db.VarChar(20)
+  message    String
+  details    Json?
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+
+  @@map("monitoring_alerts")
+  @@schema("oracle")
+}
+
+model oracle_monitoring_metrics {
+  id           Int       @id @default(autoincrement())
+  metric_type  String    @db.VarChar(50)
+  metric_value Decimal?  @db.Decimal
+  metric_data  Json?
+  recorded_at  DateTime? @default(now()) @db.Timestamp(6)
+
+  @@map("monitoring_metrics")
+  @@schema("oracle")
+}
+
+model oracle_cycle_health_checks {
+  id           BigInt    @id @default(autoincrement())
+  timestamp    DateTime? @default(now()) @db.Timestamptz(6)
+  status       String    @db.VarChar(20)
+  issues_count Int
+  issues_data  Json
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@map("cycle_health_checks")
+  @@schema("oracle")
+}
+
+model oracle_cycle_health_reports {
+  id              BigInt    @id @default(autoincrement())
+  timestamp       DateTime? @default(now()) @db.Timestamptz(6)
+  status          String    @db.VarChar(20)
+  total_cycles    Int
+  missing_cycles  Int
+  anomalies_count Int
+  report_data     Json
+  created_at      DateTime? @default(now()) @db.Timestamptz(6)
+  cycle_id        BigInt?
+  issue_type      String?   @db.VarChar(255)
+  description     String?
+  severity        String?   @db.VarChar(50)
+
+  @@map("cycle_health_reports")
+  @@schema("oracle")
+}
+
+model oracle_oddyssey_prize_rollovers {
+  id            Int       @id @default(autoincrement())
+  from_cycle_id BigInt
+  to_cycle_id   BigInt
+  amount        Decimal   @db.Decimal
+  created_at    DateTime? @default(now()) @db.Timestamptz(6)
+  rollover_at   DateTime? @db.Timestamptz(6)
+  tx_hash       String?
+
+  @@unique([from_cycle_id, to_cycle_id])
+  @@index([from_cycle_id], map: "idx_oddyssey_prize_rollovers_from_cycle")
+  @@index([to_cycle_id], map: "idx_oddyssey_prize_rollovers_to_cycle")
+  @@map("oddyssey_prize_rollovers")
+  @@schema("oracle")
+}
+
+model oracle_pool_claims {
+  id               Int       @id @default(autoincrement())
+  pool_id          BigInt
+  user_address     String
+  amount           BigInt
+  claimed_at       DateTime? @default(now()) @db.Timestamptz(6)
+  block_number     BigInt?
+  transaction_hash String?
+
+  @@unique([pool_id, user_address])
+  @@map("pool_claims")
+  @@schema("oracle")
+}
+
+model oracle_pool_liquidity_providers {
+  id         Int       @id @default(autoincrement())
+  pool_id    BigInt
+  lp_address String
+  stake      BigInt
+  claimed    Boolean?  @default(false)
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([pool_id, lp_address])
+  @@map("pool_liquidity_providers")
+  @@schema("oracle")
+}
+
+model oracle_pool_refunds {
+  id               Int       @id @default(autoincrement())
+  pool_id          BigInt
+  reason           String
+  refunded_at      DateTime? @default(now()) @db.Timestamptz(6)
+  block_number     BigInt?
+  transaction_hash String?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@index([pool_id], map: "idx_pool_refunds_pool_id")
+  @@map("pool_refunds")
+  @@schema("oracle")
+}
+
+model oracle_system_health_checks {
+  id               Int       @id @default(autoincrement())
+  check_type       String    @db.VarChar(50)
+  status           String    @db.VarChar(20)
+  details          Json?
+  response_time_ms Int?
+  checked_at       DateTime? @default(now()) @db.Timestamp(6)
+
+  @@map("system_health_checks")
+  @@schema("oracle")
+}
+
+model neon_auth_users_sync {
+  raw_json   Json
+  id         String    @id @default(dbgenerated("(raw_json ->> 'id'::text)"))
+  name       String?   @default(dbgenerated("(raw_json ->> 'display_name'::text)"))
+  email      String?   @default(dbgenerated("(raw_json ->> 'primary_email'::text)"))
+  created_at DateTime? @default(dbgenerated("to_timestamp((trunc((((raw_json ->> 'signed_up_at_millis'::text))::bigint)::double precision) / (1000)::double precision))")) @db.Timestamptz(6)
+  updated_at DateTime? @db.Timestamptz(6)
+  deleted_at DateTime? @db.Timestamptz(6)
+
+  @@index([deleted_at])
+  @@map("users_sync")
+  @@schema("neon_auth")
+}

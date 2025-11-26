@@ -1,0 +1,2920 @@
+{
+  "summary": {
+    "totalReferencedTables": 33,
+    "namingIssues": 0,
+    "suspiciousReferences": 1
+  },
+  "namingIssues": [],
+  "suspiciousReferences": [
+    {
+      "type": "js_method_as_table",
+      "table": "toLowerCase",
+      "suggestion": "\"toLowerCase\" looks like a JavaScript method, not a database table"
+    }
+  ],
+  "allReferencedTables": [
+    "active_crypto_markets",
+    "bookmakers",
+    "coins",
+    "countries",
+    "cron_job_logs",
+    "crypto_coins",
+    "crypto_market_stats",
+    "crypto_prediction_markets",
+    "crypto_price_snapshots",
+    "crypto_resolution_logs",
+    "current_oddyssey_cycle",
+    "daily_game_matches",
+    "fixture_odds",
+    "fixture_results",
+    "fixtures",
+    "football_market_stats",
+    "football_prediction_markets",
+    "football_resolution_logs",
+    "leagues",
+    "match_results",
+    "matches",
+    "oddyssey_cycles",
+    "oddyssey_prize_claims",
+    "oddyssey_slips",
+    "oddyssey_slips_slip_id_seq",
+    "oddyssey_user_preferences",
+    "oddyssey_user_stats",
+    "pending_crypto_resolutions",
+    "referees",
+    "results_fetching_logs",
+    "system_alerts",
+    "toLowerCase",
+    "venues"
+  ],
+  "tableReferences": [
+    {
+      "table": "crypto_coins",
+      "file": "/backend/api/crypto.js",
+      "line": 86,
+      "context": "FROM oracle.crypto_coins cc"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/api/crypto.js",
+      "line": 88,
+      "context": "SELECT * FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/api/crypto.js",
+      "line": 184,
+      "context": "FROM oracle.crypto_coins cc"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/api/crypto.js",
+      "line": 186,
+      "context": "SELECT * FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 83,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 91,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 100,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 109,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 118,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 127,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 137,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 146,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 155,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/api/fixtures.js",
+      "line": 159,
+      "context": "LEFT JOIN oracle.leagues l ON f.league_id = l.league_id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 191,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 401,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 402,
+      "context": "LEFT JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 424,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 529,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 530,
+      "context": "LEFT JOIN oracle.fixture_odds fo ON f.id::VARCHAR = fo.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 591,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 599,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 608,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 617,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 628,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/api/fixtures.js",
+      "line": 632,
+      "context": "LEFT JOIN oracle.leagues l ON f.league_id = l.league_id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 654,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 743,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 744,
+      "context": "LEFT JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 917,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/fixtures.js",
+      "line": 918,
+      "context": "LEFT JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/api/fixtures.js",
+      "line": 919,
+      "context": "LEFT JOIN oracle.fixture_results r ON f.id::VARCHAR = r.fixture_id::VARCHAR"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/api/fixtures.js",
+      "line": 1017,
+      "context": "FROM oracle.leagues l"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/fixtures.js",
+      "line": 1018,
+      "context": "LEFT JOIN oracle.fixtures f ON l.league_id = f.league_id"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/api/fixtures.js",
+      "line": 1118,
+      "context": "const result = await db.query('SELECT logo_url FROM oracle.leagues WHERE league_id = $1', [leagueId]"
+    },
+    {
+      "table": "matches",
+      "file": "/backend/api/matches.js",
+      "line": 21,
+      "context": "FROM oracle.matches m"
+    },
+    {
+      "table": "match_results",
+      "file": "/backend/api/matches.js",
+      "line": 22,
+      "context": "LEFT JOIN oracle.match_results mr ON m.match_id = mr.match_id"
+    },
+    {
+      "table": "matches",
+      "file": "/backend/api/matches.js",
+      "line": 79,
+      "context": "FROM oracle.matches m"
+    },
+    {
+      "table": "match_results",
+      "file": "/backend/api/matches.js",
+      "line": 80,
+      "context": "LEFT JOIN oracle.match_results mr ON m.match_id = mr.match_id"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/matches.js",
+      "line": 127,
+      "context": "JOIN oracle.daily_game_matches dgm ON dg.game_date = dgm.game_date"
+    },
+    {
+      "table": "matches",
+      "file": "/backend/api/matches.js",
+      "line": 128,
+      "context": "JOIN oracle.matches m ON dgm.match_id = m.match_id"
+    },
+    {
+      "table": "match_results",
+      "file": "/backend/api/matches.js",
+      "line": 129,
+      "context": "LEFT JOIN oracle.match_results mr ON m.match_id = mr.match_id"
+    },
+    {
+      "table": "system_alerts",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 127,
+      "context": "let query = 'SELECT * FROM oracle.system_alerts';"
+    },
+    {
+      "table": "results_fetching_logs",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 226,
+      "context": "FROM oracle.results_fetching_logs"
+    },
+    {
+      "table": "cron_job_logs",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 241,
+      "context": "FROM oracle.cron_job_logs"
+    },
+    {
+      "table": "results_fetching_logs",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 257,
+      "context": "FROM oracle.results_fetching_logs)"
+    },
+    {
+      "table": "cron_job_logs",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 267,
+      "context": "FROM oracle.cron_job_logs)"
+    },
+    {
+      "table": "results_fetching_logs",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 305,
+      "context": "FROM oracle.results_fetching_logs"
+    },
+    {
+      "table": "cron_job_logs",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 317,
+      "context": "FROM oracle.cron_job_logs"
+    },
+    {
+      "table": "system_alerts",
+      "file": "/backend/api/monitoring-dashboard.js",
+      "line": 329,
+      "context": "FROM oracle.system_alerts"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 32,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 42,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/oddyssey.js",
+      "line": 117,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 232,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 241,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/oddyssey.js",
+      "line": 352,
+      "context": "const fixturesCount = await db.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/oddyssey.js",
+      "line": 358,
+      "context": "SELECT COUNT(*) FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/oddyssey.js",
+      "line": 594,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/oddyssey.js",
+      "line": 789,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/oddyssey.js",
+      "line": 790,
+      "context": "LEFT JOIN oracle.fixture_odds fo ON f.id::VARCHAR = fo.fixture_id"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/oddyssey.js",
+      "line": 907,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1138,
+      "context": "SELECT * FROM oracle.current_oddyssey_cycle"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1258,
+      "context": "SELECT cycle_id FROM oracle.oddyssey_cycles WHERE cycle_id = $1"
+    },
+    {
+      "table": "oddyssey_slips_slip_id_seq",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1270,
+      "context": "CREATE SEQUENCE IF NOT EXISTS oracle.oddyssey_slips_slip_id_seq"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1280,
+      "context": "INSERT INTO oracle.oddyssey_slips ("
+    },
+    {
+      "table": "oddyssey_slips_slip_id_seq",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1282,
+      "context": ") VALUES (nextval('oracle.oddyssey_slips_slip_id_seq'), $1, $2, $3, FALSE, NOW(), $4)"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1323,
+      "context": "SELECT * FROM oracle.oddyssey_slips WHERE slip_id = $1"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1375,
+      "context": "UPDATE oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1410,
+      "context": "FROM oracle.oddyssey_slips s"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1443,
+      "context": "FROM oracle.oddyssey_slips s"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1478,
+      "context": "FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_user_preferences",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1503,
+      "context": "SELECT * FROM oracle.oddyssey_user_preferences"
+    },
+    {
+      "table": "oddyssey_user_preferences",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1541,
+      "context": "INSERT INTO oracle.oddyssey_user_preferences ("
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1578,
+      "context": "FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1589,
+      "context": "FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1622,
+      "context": "FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1684,
+      "context": "FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_user_stats",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1695,
+      "context": "FROM oracle.oddyssey_user_stats"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1705,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1710,
+      "context": "SELECT MAX(cycle_id) as current_cycle_id FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/api/oddyssey.js",
+      "line": 1723,
+      "context": "FROM oracle.oddyssey_slips s"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 573,
+      "context": "await db.query('DELETE FROM oracle.fixture_odds');"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 574,
+      "context": "await db.query('DELETE FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 597,
+      "context": "const fixtureCount = await db.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 598,
+      "context": "const oddsCount = await db.query('SELECT COUNT(*) FROM oracle.fixture_odds');"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/api/server.js",
+      "line": 599,
+      "context": "const leagueCount = await db.query('SELECT COUNT(*) FROM oracle.leagues');"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 605,
+      "context": "`SELECT COUNT(*) FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 612,
+      "context": "`SELECT COUNT(*) FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 732,
+      "context": "INSERT INTO oracle.fixtures (id, name, league_id, home_team, away_team, match_date, status)"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 763,
+      "context": "INSERT INTO oracle.fixture_odds (fixture_id, bookmaker_id, market_id, label, value)"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 771,
+      "context": "const totalFixtures = await client.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 772,
+      "context": "const totalOdds = await client.query('SELECT COUNT(*) FROM oracle.fixture_odds');"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1136,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 1216,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 1233,
+      "context": "const fixtureCount = await db.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 1234,
+      "context": "const oddsCount = await db.query('SELECT COUNT(*) FROM oracle.fixture_odds');"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1236,
+      "context": "SELECT COUNT(*) FROM oracle.daily_game_matches WHERE game_date = $1"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/api/server.js",
+      "line": 1285,
+      "context": "SELECT matches_data FROM oracle.oddyssey_cycles WHERE cycle_id = $1"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1304,
+      "context": "SELECT fixture_id FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1316,
+      "context": "SELECT fixture_id FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/api/server.js",
+      "line": 1352,
+      "context": "INSERT INTO oracle.fixture_results ("
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1509,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 1605,
+      "context": "const fixtureCount = await db.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 1606,
+      "context": "const oddsCount = await db.query('SELECT COUNT(*) FROM oracle.fixture_odds');"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1608,
+      "context": "SELECT COUNT(*) FROM oracle.daily_game_matches WHERE game_date = $1"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1673,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/api/server.js",
+      "line": 1772,
+      "context": "const fixtureCount = await db.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/api/server.js",
+      "line": 1773,
+      "context": "const oddsCount = await db.query('SELECT COUNT(*) FROM oracle.fixture_odds');"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/api/server.js",
+      "line": 1775,
+      "context": "SELECT COUNT(*) FROM oracle.daily_game_matches WHERE game_date = $1"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/check-cycles.js",
+      "line": 56,
+      "context": "console.log('❌ oracle.oddyssey_cycles table does not exist');"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/check-cycles.js",
+      "line": 75,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/check-cycles.js",
+      "line": 110,
+      "context": "SELECT * FROM oracle.current_oddyssey_cycle"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/check-cycles.js",
+      "line": 128,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/check-cycles.js",
+      "line": 198,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/check-cycles.js",
+      "line": 255,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/create-test-cycle.js",
+      "line": 21,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/cron/coordinated-oddyssey-scheduler.js",
+      "line": 290,
+      "context": "DELETE FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/cron/coordinated-oddyssey-scheduler.js",
+      "line": 302,
+      "context": "DELETE FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/cron/coordinated-oddyssey-scheduler.js",
+      "line": 314,
+      "context": "DELETE FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/cron/coordinated-oddyssey-scheduler.js",
+      "line": 349,
+      "context": "FROM oracle.current_oddyssey_cycle"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/cron/coordinated-oddyssey-scheduler.js",
+      "line": 405,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/cron/coordinated-oddyssey-scheduler.js",
+      "line": 406,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "cron_job_logs",
+      "file": "/backend/cron/coordinated-results-scheduler.js",
+      "line": 285,
+      "context": "INSERT INTO oracle.cron_job_logs ("
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 162,
+      "context": "FROM oracle.crypto_coins"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 202,
+      "context": "INSERT INTO oracle.crypto_price_snapshots ("
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 263,
+      "context": "FROM oracle.crypto_prediction_markets cpm"
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 264,
+      "context": "JOIN oracle.crypto_coins cc ON cpm.coinpaprika_id = cc.coinpaprika_id"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 266,
+      "context": "SELECT price_usd FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 294,
+      "context": "INSERT INTO oracle.crypto_resolution_logs ("
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 343,
+      "context": "UPDATE oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 356,
+      "context": "INSERT INTO oracle.crypto_resolution_logs ("
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 393,
+      "context": "INSERT INTO oracle.crypto_coins ("
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 435,
+      "context": "DELETE FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 442,
+      "context": "DELETE FROM oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 450,
+      "context": "DELETE FROM oracle.crypto_resolution_logs"
+    },
+    {
+      "table": "crypto_market_stats",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 457,
+      "context": "DELETE FROM oracle.crypto_market_stats"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 500,
+      "context": "FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 519,
+      "context": "FROM oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "crypto_market_stats",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 527,
+      "context": "INSERT INTO oracle.crypto_market_stats ("
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 616,
+      "context": "(SELECT COUNT(*) FROM oracle.crypto_coins WHERE is_active = true) as active_coins,"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 617,
+      "context": "(SELECT COUNT(*) FROM oracle.crypto_prediction_markets WHERE resolved = false) as active_markets,"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 618,
+      "context": "(SELECT COUNT(*) FROM oracle.crypto_prediction_markets WHERE resolved = false AND end_time <= NOW())"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/cron/crypto-scheduler.js",
+      "line": 619,
+      "context": "(SELECT COUNT(*) FROM oracle.crypto_price_snapshots WHERE created_at > NOW() - INTERVAL '1 hour') as"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 157,
+      "context": "DELETE FROM oracle.football_prediction_markets"
+    },
+    {
+      "table": "football_resolution_logs",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 167,
+      "context": "DELETE FROM oracle.football_resolution_logs"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 193,
+      "context": "FROM oracle.football_prediction_markets"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 204,
+      "context": "FROM oracle.football_prediction_markets"
+    },
+    {
+      "table": "football_market_stats",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 218,
+      "context": "INSERT INTO oracle.football_market_stats ("
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 262,
+      "context": "FROM oracle.football_prediction_markets"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 275,
+      "context": "FROM oracle.football_prediction_markets fpm"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 276,
+      "context": "JOIN oracle.fixtures f ON fpm.fixture_id = f.id"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/cron/football-scheduler.js",
+      "line": 277,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/cron/oddyssey-scheduler.js",
+      "line": 207,
+      "context": "DELETE FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/cron/oddyssey-scheduler.js",
+      "line": 218,
+      "context": "DELETE FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/cron/oddyssey-scheduler.js",
+      "line": 250,
+      "context": "FROM oracle.current_oddyssey_cycle"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/cron/oddyssey-scheduler.js",
+      "line": 318,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/cron/oddyssey-scheduler.js",
+      "line": 319,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "matches",
+      "file": "/backend/db/db.js",
+      "line": 159,
+      "context": "INSERT INTO oracle.matches (match_id, home_team, away_team, match_time, league)"
+    },
+    {
+      "table": "match_results",
+      "file": "/backend/db/db.js",
+      "line": 174,
+      "context": "INSERT INTO oracle.match_results ("
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/initialize-missing-tables.js",
+      "line": 47,
+      "context": "'oracle.fixtures',"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/db/initialize-missing-tables.js",
+      "line": 48,
+      "context": "'oracle.fixture_odds',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/initialize-missing-tables.js",
+      "line": 49,
+      "context": "'oracle.daily_game_matches'"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/initialize-missing-tables.js",
+      "line": 138,
+      "context": "const fixtureCount = await db.query('SELECT COUNT(*) FROM oracle.fixtures');"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 6,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 7,
+      "context": "'oracle.oddyssey_slips',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 8,
+      "context": "'oracle.daily_game_matches',"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 9,
+      "context": "'oracle.fixture_results',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 10,
+      "context": "'oracle.fixtures',"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 11,
+      "context": "'oracle.fixture_odds'"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 58,
+      "context": "`CREATE TABLE IF NOT EXISTS oracle.oddyssey_cycles ("
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 76,
+      "context": "`CREATE TABLE IF NOT EXISTS oracle.oddyssey_slips ("
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 91,
+      "context": "`CREATE TABLE IF NOT EXISTS oracle.daily_game_matches ("
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 113,
+      "context": "`CREATE TABLE IF NOT EXISTS oracle.fixture_results ("
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 126,
+      "context": "`CREATE TABLE IF NOT EXISTS oracle.fixtures ("
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 158,
+      "context": "`CREATE TABLE IF NOT EXISTS oracle.fixture_odds ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 186,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_oddyssey_cycles_created_at ON oracle.oddyssey_cycles(created_at)',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 187,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_oddyssey_cycles_resolved ON oracle.oddyssey_cycles(is_resolved)',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 188,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_oddyssey_slips_cycle_id ON oracle.oddyssey_slips(cycle_id)',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 189,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_oddyssey_slips_player ON oracle.oddyssey_slips(player_address)',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 190,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_oddyssey_slips_placed_at ON oracle.oddyssey_slips(placed_at)',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 191,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_daily_game_matches_game_date ON oracle.daily_game_matches(game_date)"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 192,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_daily_game_matches_fixture_id ON oracle.daily_game_matches(fixture_i"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 193,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_daily_game_matches_cycle_id ON oracle.daily_game_matches(cycle_id)',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 194,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_daily_game_matches_selection_type ON oracle.daily_game_matches(selec"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 195,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_fixture_results_fixture_id ON oracle.fixture_results(fixture_id)',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 196,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_fixtures_home_team_id ON oracle.fixtures(home_team_id)',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 197,
+      "context": "'CREATE INDEX IF NOT EXISTS idx_fixtures_away_team_id ON oracle.fixtures(away_team_id)'"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/oddyssey-setup.js",
+      "line": 218,
+      "context": "ALTER TABLE oracle.daily_game_matches ADD CONSTRAINT unique_fixture_cycle UNIQUE (fixture_id, cycle_"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/setup.js",
+      "line": 76,
+      "context": "ALTER TABLE oracle.fixture_results ADD COLUMN outcome_1x2 TEXT;"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/setup.js",
+      "line": 80,
+      "context": "ALTER TABLE oracle.fixture_results ADD COLUMN outcome_ou25 TEXT;"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/setup.js",
+      "line": 84,
+      "context": "ALTER TABLE oracle.fixture_results ADD COLUMN status TEXT DEFAULT 'pending';"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/setup.js",
+      "line": 92,
+      "context": "ALTER TABLE oracle.daily_game_matches ADD COLUMN cycle_id INTEGER;"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/setup.js",
+      "line": 96,
+      "context": "ALTER TABLE oracle.daily_game_matches ADD COLUMN display_order INTEGER;"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/setup.js",
+      "line": 100,
+      "context": "ALTER TABLE oracle.daily_game_matches ADD CONSTRAINT unique_fixture_cycle UNIQUE (fixture_id, cycle_"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/db/setup.js",
+      "line": 108,
+      "context": "ALTER TABLE oracle.oddyssey_cycles ADD COLUMN is_resolved BOOLEAN DEFAULT FALSE;"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/db/setup.js",
+      "line": 129,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/db/setup.js",
+      "line": 130,
+      "context": "'oracle.oddyssey_slips',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/db/setup.js",
+      "line": 131,
+      "context": "'oracle.daily_game_matches',"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/db/setup.js",
+      "line": 132,
+      "context": "'oracle.fixture_results',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/db/setup.js",
+      "line": 133,
+      "context": "'oracle.fixtures',"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/db/setup.js",
+      "line": 134,
+      "context": "'oracle.fixture_odds'"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/evaluator/index.js",
+      "line": 72,
+      "context": "JOIN oracle.fixtures f ON se.match_id = f.id"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/evaluator/index.js",
+      "line": 73,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/evaluator/index.js",
+      "line": 118,
+      "context": "JOIN oracle.fixtures f ON se.match_id = f.id"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/evaluator/index.js",
+      "line": 119,
+      "context": "JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 19,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 34,
+      "context": "DELETE FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 37,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 48,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 78,
+      "context": "ALTER TABLE oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 104,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 136,
+      "context": "UPDATE oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 143,
+      "context": "DELETE FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 153,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/fix-duplicate-matches.js",
+      "line": 168,
+      "context": "UPDATE oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/indexer_oddyssey.js",
+      "line": 153,
+      "context": "INSERT INTO oracle.oddyssey_slips (slip_id, cycle_id, player_address, placed_at, is_evaluated)"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/indexer_oddyssey.js",
+      "line": 167,
+      "context": "UPDATE oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/indexer_oddyssey.js",
+      "line": 179,
+      "context": "UPDATE oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_prize_claims",
+      "file": "/backend/indexer_oddyssey.js",
+      "line": 191,
+      "context": "INSERT INTO oracle.oddyssey_prize_claims (cycle_id, player_address, rank, amount, claimed_at)"
+    },
+    {
+      "table": "oddyssey_user_preferences",
+      "file": "/backend/indexer_oddyssey.js",
+      "line": 203,
+      "context": "INSERT INTO oracle.oddyssey_user_preferences (user_address, auto_evaluate, auto_claim, notifications"
+    },
+    {
+      "table": "oddyssey_user_stats",
+      "file": "/backend/indexer_oddyssey.js",
+      "line": 219,
+      "context": "INSERT INTO oracle.oddyssey_user_stats (user_address, total_slips, total_wins, best_score, win_rate,"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/oracle/cronjob.js",
+      "line": 194,
+      "context": "FROM oracle.daily_game_matches dgm"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/oracle/cronjob.js",
+      "line": 195,
+      "context": "JOIN oracle.fixtures f ON dgm.match_id = f.id"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/oracle/cronjob.js",
+      "line": 196,
+      "context": "JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/oracle/guidedFetcher.js",
+      "line": 112,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/oracle/guidedFetcher.js",
+      "line": 113,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/oracle/guidedFetcher.js",
+      "line": 162,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/oracle/guidedFetcher.js",
+      "line": 163,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/oracle/guidedFetcher.js",
+      "line": 184,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/oracle/guidedFetcher.js",
+      "line": 185,
+      "context": "JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/oracle/oddyssey-oracle.js",
+      "line": 163,
+      "context": "'SELECT cycle_id FROM oracle.oddyssey_cycles WHERE cycle_id = $1',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/oracle/oddyssey-oracle.js",
+      "line": 173,
+      "context": "INSERT INTO oracle.oddyssey_cycles ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/oracle/oddyssey-oracle.js",
+      "line": 197,
+      "context": "SELECT * FROM oracle.oddyssey_cycles WHERE cycle_id = $1"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/oracle/oddyssey-oracle.js",
+      "line": 221,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/oracle/oddyssey-oracle.js",
+      "line": 222,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "toLowerCase",
+      "file": "/backend/oracle/oddyssey-oracle.js",
+      "line": 282,
+      "context": "isOracle: oracle && backendAddress ? oracle.toLowerCase() === backendAddress.toLowerCase() : false"
+    },
+    {
+      "table": "active_crypto_markets",
+      "file": "/backend/oracle/server.js",
+      "line": 386,
+      "context": "SELECT * FROM oracle.active_crypto_markets"
+    },
+    {
+      "table": "pending_crypto_resolutions",
+      "file": "/backend/oracle/server.js",
+      "line": 410,
+      "context": "SELECT * FROM oracle.pending_crypto_resolutions"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/drop-duplicate-tables.js",
+      "line": 8,
+      "context": "* - oddyssey.daily_game_matches (empty, use oracle.daily_game_matches)"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/drop-duplicate-tables.js",
+      "line": 9,
+      "context": "* - oddyssey.oddyssey_cycles (empty, use oracle.oddyssey_cycles)"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/drop-duplicate-tables.js",
+      "line": 10,
+      "context": "* - oddyssey.oddyssey_slips (empty, use oracle.oddyssey_slips)"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 68,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 69,
+      "context": "'oracle.daily_game_matches',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 70,
+      "context": "'oracle.oddyssey_slips'"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 100,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 191,
+      "context": "query: `SELECT cycle_id, matches_count, is_resolved FROM oracle.oddyssey_cycles ORDER BY cycle_id DE"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 195,
+      "context": "query: `SELECT COUNT(*) as count FROM oracle.daily_game_matches`"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/final-system-sync-test.js",
+      "line": 199,
+      "context": "query: `SELECT COUNT(*) as count FROM oracle.oddyssey_slips`"
+    },
+    {
+      "table": "football_resolution_logs",
+      "file": "/backend/scripts/init-database.js",
+      "line": 61,
+      "context": "ALTER TABLE oracle.football_resolution_logs"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/init-database.js",
+      "line": 93,
+      "context": "CREATE TABLE IF NOT EXISTS oracle.daily_game_matches ("
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/init-database.js",
+      "line": 120,
+      "context": "CREATE INDEX IF NOT EXISTS idx_daily_game_matches_game_date ON oracle.daily_game_matches(game_date);"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/init-database.js",
+      "line": 121,
+      "context": "CREATE INDEX IF NOT EXISTS idx_daily_game_matches_fixture_id ON oracle.daily_game_matches(fixture_id"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/init-database.js",
+      "line": 122,
+      "context": "CREATE INDEX IF NOT EXISTS idx_daily_game_matches_selection_type ON oracle.daily_game_matches(select"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/scripts/sync-current-cycle.js",
+      "line": 23,
+      "context": "const currentDbResult = await db.query('SELECT cycle_id FROM oracle.current_oddyssey_cycle');"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/sync-current-cycle.js",
+      "line": 35,
+      "context": "'SELECT cycle_id FROM oracle.oddyssey_cycles WHERE cycle_id = $1',"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/scripts/sync-current-cycle.js",
+      "line": 48,
+      "context": "await db.query('DELETE FROM oracle.current_oddyssey_cycle');"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/scripts/sync-current-cycle.js",
+      "line": 51,
+      "context": "INSERT INTO oracle.current_oddyssey_cycle ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/sync-current-cycle.js",
+      "line": 62,
+      "context": "FROM oracle.oddyssey_cycles WHERE cycle_id = $1"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/scripts/sync-current-cycle.js",
+      "line": 70,
+      "context": "const verifyResult = await db.query('SELECT cycle_id FROM oracle.current_oddyssey_cycle');"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-cycle-creation.js",
+      "line": 40,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/scripts/test-cycle-creation.js",
+      "line": 61,
+      "context": "FROM oracle.current_oddyssey_cycle"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-cycle-creation.js",
+      "line": 83,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 17,
+      "context": "'oracle.oddyssey_cycles': {"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 25,
+      "context": "'oracle.daily_game_matches': {"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 33,
+      "context": "'oracle.oddyssey_slips': {"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 156,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 178,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 186,
+      "context": "FROM oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 216,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 217,
+      "context": "'oracle.oddyssey_slips',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync-simple.js",
+      "line": 218,
+      "context": "'oracle.daily_game_matches'"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 40,
+      "context": "'oracle.oddyssey_cycles': {"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 54,
+      "context": "'oracle.daily_game_matches': {"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 72,
+      "context": "'oracle.oddyssey_slips': {"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 307,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 308,
+      "context": "WHERE cycle_id = (SELECT MAX(cycle_id) FROM oracle.oddyssey_cycles)"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 329,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 330,
+      "context": "WHERE cycle_id = (SELECT MAX(cycle_id) FROM oracle.oddyssey_cycles)"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 356,
+      "context": "SELECT cycle_id FROM oracle.oddyssey_cycles ORDER BY cycle_id DESC LIMIT 1"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 382,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 422,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 423,
+      "context": "'oracle.oddyssey_slips',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/test-system-sync.js",
+      "line": 424,
+      "context": "'oracle.daily_game_matches'"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 8,
+      "context": "* - oracle.daily_game_matches -> oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 8,
+      "context": "* - oracle.daily_game_matches -> oracle.daily_game_matches"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 9,
+      "context": "* - oracle.oddyssey_cycles -> oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 9,
+      "context": "* - oracle.oddyssey_cycles -> oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 10,
+      "context": "* - oracle.oddyssey_slips -> oracle.oddyssey_slips"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 10,
+      "context": "* - oracle.oddyssey_slips -> oracle.oddyssey_slips"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 22,
+      "context": "'oracle.daily_game_matches': 'oracle.daily_game_matches',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 22,
+      "context": "'oracle.daily_game_matches': 'oracle.daily_game_matches',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 23,
+      "context": "'oracle.oddyssey_cycles': 'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 23,
+      "context": "'oracle.oddyssey_cycles': 'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 24,
+      "context": "'oracle.oddyssey_slips': 'oracle.oddyssey_slips'"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/update-schema-references.js",
+      "line": 24,
+      "context": "'oracle.oddyssey_slips': 'oracle.oddyssey_slips'"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/verify-schema-cleanup.js",
+      "line": 33,
+      "context": "'oracle.daily_game_matches',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/verify-schema-cleanup.js",
+      "line": 34,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/verify-schema-cleanup.js",
+      "line": 35,
+      "context": "'oracle.oddyssey_slips'"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/scripts/verify-schema-cleanup.js",
+      "line": 86,
+      "context": "'oddyssey.daily_game_matches': 'oracle.daily_game_matches',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/scripts/verify-schema-cleanup.js",
+      "line": 87,
+      "context": "'oddyssey.oddyssey_cycles': 'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/scripts/verify-schema-cleanup.js",
+      "line": 88,
+      "context": "'oddyssey.oddyssey_slips': 'oracle.oddyssey_slips'"
+    },
+    {
+      "table": "system_alerts",
+      "file": "/backend/services/alert-handler.js",
+      "line": 120,
+      "context": "INSERT INTO oracle.system_alerts ("
+    },
+    {
+      "table": "system_alerts",
+      "file": "/backend/services/alert-handler.js",
+      "line": 206,
+      "context": "UPDATE oracle.system_alerts"
+    },
+    {
+      "table": "system_alerts",
+      "file": "/backend/services/alert-handler.js",
+      "line": 225,
+      "context": "SELECT * FROM oracle.system_alerts"
+    },
+    {
+      "table": "system_alerts",
+      "file": "/backend/services/alert-handler.js",
+      "line": 249,
+      "context": "FROM oracle.system_alerts"
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 131,
+      "context": "FROM oracle.crypto_coins"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 171,
+      "context": "INSERT INTO oracle.crypto_price_snapshots ("
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 237,
+      "context": "FROM oracle.crypto_prediction_markets cpm"
+    },
+    {
+      "table": "crypto_coins",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 238,
+      "context": "JOIN oracle.crypto_coins cc ON cpm.coinpaprika_id = cc.coinpaprika_id"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 240,
+      "context": "SELECT price_usd FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 266,
+      "context": "INSERT INTO oracle.crypto_resolution_logs ("
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 312,
+      "context": "UPDATE oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 357,
+      "context": "INSERT INTO oracle.crypto_resolution_logs ("
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 376,
+      "context": "UPDATE oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 403,
+      "context": "FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 415,
+      "context": "FROM oracle.crypto_price_snapshots"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 438,
+      "context": "FROM oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "crypto_market_stats",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 446,
+      "context": "INSERT INTO oracle.crypto_market_stats ("
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 515,
+      "context": "INSERT INTO oracle.crypto_prediction_markets ("
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 560,
+      "context": "FROM oracle.crypto_resolution_logs"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/crypto-oracle-bot.js",
+      "line": 566,
+      "context": "FROM oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 129,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 130,
+      "context": "LEFT JOIN oracle.fixture_results r ON f.id::VARCHAR = r.fixture_id::VARCHAR"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 197,
+      "context": "FROM oracle.football_prediction_markets fpm"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 198,
+      "context": "JOIN oracle.fixtures f ON fpm.fixture_id::VARCHAR = f.id::VARCHAR"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 199,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "football_resolution_logs",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 222,
+      "context": "INSERT INTO oracle.football_resolution_logs ("
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 320,
+      "context": "UPDATE oracle.football_prediction_markets"
+    },
+    {
+      "table": "football_resolution_logs",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 364,
+      "context": "INSERT INTO oracle.football_resolution_logs ("
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 382,
+      "context": "UPDATE oracle.football_prediction_markets"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 404,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 416,
+      "context": "INSERT INTO oracle.football_prediction_markets ("
+    },
+    {
+      "table": "football_resolution_logs",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 465,
+      "context": "FROM oracle.football_resolution_logs"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/services/football-oracle-bot.js",
+      "line": 471,
+      "context": "FROM oracle.football_prediction_markets"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/health-monitor.js",
+      "line": 119,
+      "context": "'oracle.fixtures',"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/health-monitor.js",
+      "line": 120,
+      "context": "'oracle.fixture_odds',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/health-monitor.js",
+      "line": 121,
+      "context": "'oracle.daily_game_matches',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/health-monitor.js",
+      "line": 297,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/health-monitor.js",
+      "line": 304,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/health-monitor.js",
+      "line": 343,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/health-monitor.js",
+      "line": 356,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/health-monitor.js",
+      "line": 396,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/health-monitor.js",
+      "line": 408,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 159,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 160,
+      "context": "LEFT JOIN oracle.leagues l ON f.league_id = l.league_id"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 167,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 176,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 430,
+      "context": "// Save cycle info to oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 432,
+      "context": "INSERT INTO oracle.oddyssey_cycles ("
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 472,
+      "context": "// Third, update matches in oracle.daily_game_matches with the oracle cycle_id"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 479,
+      "context": "UPDATE oracle.daily_game_matches"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 493,
+      "context": "await db.query('DELETE FROM oracle.current_oddyssey_cycle');"
+    },
+    {
+      "table": "current_oddyssey_cycle",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 496,
+      "context": "INSERT INTO oracle.current_oddyssey_cycle ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 507,
+      "context": "FROM oracle.oddyssey_cycles WHERE cycle_id = $1"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-manager.js",
+      "line": 564,
+      "context": "const query = 'SELECT * FROM oracle.oddyssey_cycles WHERE cycle_id = $1';"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 130,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 131,
+      "context": "LEFT JOIN oracle.fixture_odds fo ON f.id::VARCHAR = fo.fixture_id AND fo.is_main = true"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 278,
+      "context": "// Use oracle.daily_game_matches schema"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 293,
+      "context": "CREATE TABLE IF NOT EXISTS oracle.daily_game_matches ("
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 302,
+      "context": "console.log('✅ Created oracle.daily_game_matches table');"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 360,
+      "context": "// Use oracle.daily_game_matches schema"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 377,
+      "context": "JOIN oracle.fixtures f ON dgm.fixture_id = f.id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 412,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 413,
+      "context": "INNER JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 483,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 484,
+      "context": "INNER JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 517,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 518,
+      "context": "INNER JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 807,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 816,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 818,
+      "context": "SELECT id FROM oracle.fixtures"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 828,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 830,
+      "context": "SELECT id FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 847,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/oddyssey-match-selector.js",
+      "line": 848,
+      "context": "INNER JOIN oracle.fixture_odds o ON f.id::VARCHAR = o.fixture_id"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 80,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 185,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 254,
+      "context": "UPDATE oracle.oddyssey_cycles"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 284,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 285,
+      "context": "INNER JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 352,
+      "context": "INSERT INTO oracle.oddyssey_cycles ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-oracle-bot.js",
+      "line": 415,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 25,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 225,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 226,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 375,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 376,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 399,
+      "context": "UPDATE oracle.fixture_results"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 435,
+      "context": "UPDATE oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 502,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 531,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 549,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 617,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/oddyssey-results-resolver.js",
+      "line": 618,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 97,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 140,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 201,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 254,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 255,
+      "context": "LEFT JOIN oracle.leagues l ON f.league_id = l.league_id"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 262,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 271,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 458,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/persistent-daily-game-manager.js",
+      "line": 493,
+      "context": "INSERT INTO oracle.daily_game_matches ("
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 104,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 105,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "results_fetching_logs",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 123,
+      "context": "INSERT INTO oracle.results_fetching_logs ("
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 140,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 148,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 149,
+      "context": "INNER JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 157,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 158,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 167,
+      "context": "FROM oracle.fixture_results"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 195,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 196,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 264,
+      "context": "FROM oracle.fixture_results fr"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/results-fetcher-service.js",
+      "line": 265,
+      "context": "INNER JOIN oracle.fixtures f ON fr.fixture_id::VARCHAR = f.id::VARCHAR"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 34,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 53,
+      "context": "INSERT INTO oracle.oddyssey_cycles ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 75,
+      "context": "SELECT id FROM oracle.oddyssey_cycles WHERE cycle_number = $1"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 114,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 115,
+      "context": "LEFT JOIN oracle.leagues l ON f.league_id = l.league_id"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 120,
+      "context": "console.warn(`⚠️ Fixture ${fixtureId} not found in oracle.fixtures`);"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 129,
+      "context": "FROM oracle.fixture_odds"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 160,
+      "context": "// Insert into oracle.daily_game_matches"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 162,
+      "context": "INSERT INTO oracle.daily_game_matches ("
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 211,
+      "context": "UPDATE oracle.oddyssey_cycles"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 233,
+      "context": "SELECT cycle_id FROM oracle.oddyssey_cycles ORDER BY cycle_id"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 254,
+      "context": "db.query('SELECT COUNT(*) as count FROM oracle.oddyssey_cycles'),"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/schema-sync-bridge.js",
+      "line": 255,
+      "context": "db.query('SELECT COUNT(*) as count FROM oracle.oddyssey_cycles')"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/sportmonks.js",
+      "line": 350,
+      "context": "INSERT INTO oracle.fixtures ("
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/sportmonks.js",
+      "line": 424,
+      "context": "INSERT INTO oracle.fixture_odds ("
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/sportmonks.js",
+      "line": 630,
+      "context": "INSERT INTO oracle.fixture_results ("
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/sportmonks.js",
+      "line": 706,
+      "context": "UPDATE oracle.fixtures"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/sportmonks.js",
+      "line": 863,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/sportmonks.js",
+      "line": 864,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/sportmonks.js",
+      "line": 886,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/sportmonks.js",
+      "line": 887,
+      "context": "INNER JOIN oracle.fixture_odds fo1 ON f.id = fo1.fixture_id"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/services/sportmonks.js",
+      "line": 889,
+      "context": "INNER JOIN oracle.fixture_odds fo2 ON f.id = fo2.fixture_id"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/startup-initializer.js",
+      "line": 83,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/startup-initializer.js",
+      "line": 150,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/services/startup-initializer.js",
+      "line": 159,
+      "context": "FROM oracle.daily_game_matches"
+    },
+    {
+      "table": "results_fetching_logs",
+      "file": "/backend/services/system-monitor.js",
+      "line": 354,
+      "context": "FROM oracle.results_fetching_logs"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/services/system-monitor.js",
+      "line": 365,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/services/system-monitor.js",
+      "line": 366,
+      "context": "LEFT JOIN oracle.fixture_results fr ON f.id::VARCHAR = fr.fixture_id::VARCHAR"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/services/system-monitor.js",
+      "line": 407,
+      "context": "FROM oracle.oddyssey_cycles"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/services/system-monitor.js",
+      "line": 446,
+      "context": "FROM oracle.football_prediction_markets"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/services/system-monitor.js",
+      "line": 485,
+      "context": "FROM oracle.crypto_prediction_markets"
+    },
+    {
+      "table": "cron_job_logs",
+      "file": "/backend/services/system-monitor.js",
+      "line": 525,
+      "context": "FROM oracle.cron_job_logs"
+    },
+    {
+      "table": "leagues",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 68,
+      "context": "'oracle.leagues',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 69,
+      "context": "'oracle.fixtures',"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 70,
+      "context": "'oracle.fixture_odds',"
+    },
+    {
+      "table": "fixture_results",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 71,
+      "context": "'oracle.fixture_results',"
+    },
+    {
+      "table": "football_prediction_markets",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 72,
+      "context": "'oracle.football_prediction_markets',"
+    },
+    {
+      "table": "matches",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 73,
+      "context": "'oracle.matches',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 74,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "coins",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 75,
+      "context": "'oracle.coins',"
+    },
+    {
+      "table": "crypto_price_snapshots",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 76,
+      "context": "'oracle.crypto_price_snapshots',"
+    },
+    {
+      "table": "crypto_prediction_markets",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 77,
+      "context": "'oracle.crypto_prediction_markets',"
+    },
+    {
+      "table": "crypto_market_stats",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 78,
+      "context": "'oracle.crypto_market_stats',"
+    },
+    {
+      "table": "crypto_resolution_logs",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 79,
+      "context": "'oracle.crypto_resolution_logs',"
+    },
+    {
+      "table": "football_resolution_logs",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 80,
+      "context": "'oracle.football_resolution_logs',"
+    },
+    {
+      "table": "football_market_stats",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 81,
+      "context": "'oracle.football_market_stats',"
+    },
+    {
+      "table": "referees",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 82,
+      "context": "'oracle.referees',"
+    },
+    {
+      "table": "venues",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 83,
+      "context": "'oracle.venues',"
+    },
+    {
+      "table": "bookmakers",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 84,
+      "context": "'oracle.bookmakers',"
+    },
+    {
+      "table": "countries",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 85,
+      "context": "'oracle.countries',"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 88,
+      "context": "'oracle.daily_game_matches',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 89,
+      "context": "'oracle.oddyssey_cycles',"
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 90,
+      "context": "'oracle.oddyssey_slips',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 135,
+      "context": "FROM oracle.fixtures f"
+    },
+    {
+      "table": "fixture_odds",
+      "file": "/backend/setup-perfect-database.js",
+      "line": 136,
+      "context": "LEFT JOIN oracle.fixture_odds fo ON f.id = fo.fixture_id"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/sync-contract-matches-to-db.js",
+      "line": 20,
+      "context": "'SELECT cycle_id FROM oracle.oddyssey_cycles WHERE cycle_id = $1',"
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/sync-contract-matches-to-db.js",
+      "line": 56,
+      "context": "FROM oracle.fixtures"
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/sync-contract-matches-to-db.js",
+      "line": 100,
+      "context": "'SELECT COUNT(*) as count FROM oracle.daily_game_matches WHERE cycle_id = $1',"
+    },
+    {
+      "table": "oddyssey_cycles",
+      "file": "/backend/sync-contract-matches-to-db.js",
+      "line": 118,
+      "context": "INSERT INTO oracle.oddyssey_cycles ("
+    },
+    {
+      "table": "daily_game_matches",
+      "file": "/backend/sync-contract-matches-to-db.js",
+      "line": 146,
+      "context": "INSERT INTO oracle.daily_game_matches ("
+    },
+    {
+      "table": "fixtures",
+      "file": "/backend/sync-contract-matches-to-db.js",
+      "line": 179,
+      "context": "INSERT INTO oracle.fixtures ("
+    },
+    {
+      "table": "oddyssey_slips",
+      "file": "/backend/utils/badgeManager.js",
+      "line": 272,
+      "context": "FROM oracle.oddyssey_slips"
+    }
+  ]
+}

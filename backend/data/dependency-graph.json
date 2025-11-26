@@ -1,0 +1,1673 @@
+{
+  "dependencyGraph": [
+    [
+      "airdrop-indexer",
+      {
+        "id": "airdrop-indexer",
+        "name": "airdrop-indexer",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "airdrop-indexer",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.621Z",
+          "updatedAt": "2025-10-11T10:40:51.621Z",
+          "discoveredAt": "2025-10-11T10:40:51.617Z"
+        }
+      }
+    ],
+    [
+      "alert-handler",
+      {
+        "id": "alert-handler",
+        "name": "alert-handler",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "alert-handler",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.882Z",
+          "updatedAt": "2025-10-11T10:40:51.882Z",
+          "discoveredAt": "2025-10-11T10:40:51.882Z"
+        }
+      }
+    ],
+    [
+      "auto-evaluation-trigger",
+      {
+        "id": "auto-evaluation-trigger",
+        "name": "auto-evaluation-trigger",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "auto-evaluation-trigger",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.884Z",
+          "updatedAt": "2025-10-11T10:40:51.884Z",
+          "discoveredAt": "2025-10-11T10:40:51.884Z"
+        }
+      }
+    ],
+    [
+      "coinpaprika",
+      {
+        "id": "coinpaprika",
+        "name": "coinpaprika",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "coinpaprika",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.885Z",
+          "updatedAt": "2025-10-11T10:40:51.885Z",
+          "discoveredAt": "2025-10-11T10:40:51.885Z"
+        }
+      }
+    ],
+    [
+      "continuous-slip-evaluator",
+      {
+        "id": "continuous-slip-evaluator",
+        "name": "continuous-slip-evaluator",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "continuous-slip-evaluator",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.885Z",
+          "updatedAt": "2025-10-11T10:40:51.885Z",
+          "discoveredAt": "2025-10-11T10:40:51.885Z"
+        }
+      }
+    ],
+    [
+      "cron-coordinator",
+      {
+        "id": "cron-coordinator",
+        "name": "cron-coordinator",
+        "type": "scheduler",
+        "status": "registered",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "cron-coordinator",
+          "type": "scheduler",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Cron job coordination service",
+          "endpoints": [
+            "/api/cron"
+          ],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:44:48.842Z",
+          "updatedAt": "2025-10-11T10:56:45.868Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "crypto-oracle-bot",
+      {
+        "id": "crypto-oracle-bot",
+        "name": "crypto-oracle-bot",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "crypto-oracle-bot",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.887Z",
+          "updatedAt": "2025-10-11T10:40:51.887Z",
+          "discoveredAt": "2025-10-11T10:40:51.887Z"
+        }
+      }
+    ],
+    [
+      "cycle-format-normalizer",
+      {
+        "id": "cycle-format-normalizer",
+        "name": "cycle-format-normalizer",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "cycle-format-normalizer",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.888Z",
+          "updatedAt": "2025-10-11T10:40:51.888Z",
+          "discoveredAt": "2025-10-11T10:40:51.888Z"
+        }
+      }
+    ],
+    [
+      "daily-stats-service",
+      {
+        "id": "daily-stats-service",
+        "name": "daily-stats-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "daily-stats-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.899Z",
+          "updatedAt": "2025-10-11T10:40:51.899Z",
+          "discoveredAt": "2025-10-11T10:40:51.899Z"
+        }
+      }
+    ],
+    [
+      "database-optimization-service",
+      {
+        "id": "database-optimization-service",
+        "name": "database-optimization-service",
+        "type": "optimization",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "database-optimization-service",
+          "type": "optimization",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Database optimization service",
+          "endpoints": [
+            "/api/database-optimization"
+          ],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.855Z",
+          "updatedAt": "2025-10-11T10:44:48.855Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "dependency-graph-service",
+      {
+        "id": "dependency-graph-service",
+        "name": "dependency-graph-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [
+          "enhanced-health-monitoring"
+        ],
+        "metadata": {
+          "name": "dependency-graph-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.918Z",
+          "updatedAt": "2025-10-11T10:40:51.918Z",
+          "discoveredAt": "2025-10-11T10:40:51.916Z"
+        }
+      }
+    ],
+    [
+      "enhanced-airdrop-service",
+      {
+        "id": "enhanced-airdrop-service",
+        "name": "enhanced-airdrop-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "enhanced-airdrop-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.920Z",
+          "updatedAt": "2025-10-11T10:40:51.920Z",
+          "discoveredAt": "2025-10-11T10:40:51.920Z"
+        }
+      }
+    ],
+    [
+      "enhanced-analytics-service",
+      {
+        "id": "enhanced-analytics-service",
+        "name": "enhanced-analytics-service",
+        "type": "analytics",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service"
+        ],
+        "dependents": [
+          "optimized-leaderboard-service"
+        ],
+        "metadata": {
+          "name": "enhanced-analytics-service",
+          "type": "analytics",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Enhanced analytics service",
+          "endpoints": [
+            "/api/analytics"
+          ],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.848Z",
+          "updatedAt": "2025-10-11T10:44:48.848Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "enhanced-health-monitoring",
+      {
+        "id": "enhanced-health-monitoring",
+        "name": "enhanced-health-monitoring",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [
+          "service-registry",
+          "dependency-graph-service"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "enhanced-health-monitoring",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.922Z",
+          "updatedAt": "2025-10-11T10:40:51.922Z",
+          "discoveredAt": "2025-10-11T10:40:51.922Z"
+        }
+      }
+    ],
+    [
+      "event-driven-bet-sync",
+      {
+        "id": "event-driven-bet-sync",
+        "name": "event-driven-bet-sync",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "event-driven-bet-sync",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:40:51.923Z",
+          "updatedAt": "2025-10-11T10:56:45.858Z",
+          "discoveredAt": "2025-10-11T10:40:51.923Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "event-driven-pool-sync",
+      {
+        "id": "event-driven-pool-sync",
+        "name": "event-driven-pool-sync",
+        "type": "sync",
+        "status": "registered",
+        "dependencies": [],
+        "dependents": [
+          "unified-pool-settlement-system"
+        ],
+        "metadata": {
+          "name": "event-driven-pool-sync",
+          "type": "sync",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Event-driven pool synchronization service",
+          "endpoints": [
+            "/api/pools/sync"
+          ],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:44:48.838Z",
+          "updatedAt": "2025-10-11T10:56:45.856Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "event-driven-slip-sync",
+      {
+        "id": "event-driven-slip-sync",
+        "name": "event-driven-slip-sync",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "event-driven-slip-sync",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.925Z",
+          "updatedAt": "2025-10-11T10:40:51.925Z",
+          "discoveredAt": "2025-10-11T10:40:51.925Z"
+        }
+      }
+    ],
+    [
+      "fixture-mapping-maintainer",
+      {
+        "id": "fixture-mapping-maintainer",
+        "name": "fixture-mapping-maintainer",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "fixture-mapping-maintainer",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.926Z",
+          "updatedAt": "2025-10-11T10:40:51.926Z",
+          "discoveredAt": "2025-10-11T10:40:51.926Z"
+        }
+      }
+    ],
+    [
+      "football-oracle-bot",
+      {
+        "id": "football-oracle-bot",
+        "name": "football-oracle-bot",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "football-oracle-bot",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.944Z",
+          "updatedAt": "2025-10-11T10:40:51.944Z",
+          "discoveredAt": "2025-10-11T10:40:51.944Z"
+        }
+      }
+    ],
+    [
+      "guided-market-service",
+      {
+        "id": "guided-market-service",
+        "name": "guided-market-service",
+        "type": "market",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service",
+          "sportmonks"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "guided-market-service",
+          "type": "market",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Guided market service",
+          "endpoints": [
+            "/api/guided-markets"
+          ],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.854Z",
+          "updatedAt": "2025-10-11T10:44:48.854Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "leaderboard-cron-service",
+      {
+        "id": "leaderboard-cron-service",
+        "name": "leaderboard-cron-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "leaderboard-cron-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.953Z",
+          "updatedAt": "2025-10-11T10:40:51.953Z",
+          "discoveredAt": "2025-10-11T10:40:51.953Z"
+        }
+      }
+    ],
+    [
+      "leaderboard-service",
+      {
+        "id": "leaderboard-service",
+        "name": "leaderboard-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "leaderboard-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.955Z",
+          "updatedAt": "2025-10-11T10:40:51.955Z",
+          "discoveredAt": "2025-10-11T10:40:51.955Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-manager",
+      {
+        "id": "oddyssey-manager",
+        "name": "oddyssey-manager",
+        "type": "oddyssey",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service",
+          "reputation-sync-service"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-manager",
+          "type": "oddyssey",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Oddyssey game management service",
+          "endpoints": [
+            "/api/oddyssey"
+          ],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.853Z",
+          "updatedAt": "2025-10-11T10:44:48.853Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "oddyssey-match-selector",
+      {
+        "id": "oddyssey-match-selector",
+        "name": "oddyssey-match-selector",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-match-selector",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.967Z",
+          "updatedAt": "2025-10-11T10:40:51.967Z",
+          "discoveredAt": "2025-10-11T10:40:51.967Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-oracle-bot",
+      {
+        "id": "oddyssey-oracle-bot",
+        "name": "oddyssey-oracle-bot",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-oracle-bot",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:51.970Z",
+          "updatedAt": "2025-10-11T10:40:51.970Z",
+          "discoveredAt": "2025-10-11T10:40:51.970Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-results-resolver",
+      {
+        "id": "oddyssey-results-resolver",
+        "name": "oddyssey-results-resolver",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-results-resolver",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.004Z",
+          "updatedAt": "2025-10-11T10:40:52.004Z",
+          "discoveredAt": "2025-10-11T10:40:52.004Z"
+        }
+      }
+    ],
+    [
+      "persistent-daily-game-manager",
+      {
+        "id": "persistent-daily-game-manager",
+        "name": "persistent-daily-game-manager",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "persistent-daily-game-manager",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.005Z",
+          "updatedAt": "2025-10-11T10:40:52.005Z",
+          "discoveredAt": "2025-10-11T10:40:52.005Z"
+        }
+      }
+    ],
+    [
+      "reputation-decay-service",
+      {
+        "id": "reputation-decay-service",
+        "name": "reputation-decay-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "reputation-decay-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.009Z",
+          "updatedAt": "2025-10-11T10:40:52.009Z",
+          "discoveredAt": "2025-10-11T10:40:52.009Z"
+        }
+      }
+    ],
+    [
+      "reputation-event-indexer",
+      {
+        "id": "reputation-event-indexer",
+        "name": "reputation-event-indexer",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "reputation-event-indexer",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.011Z",
+          "updatedAt": "2025-10-11T10:40:52.011Z",
+          "discoveredAt": "2025-10-11T10:40:52.011Z"
+        }
+      }
+    ],
+    [
+      "reputation-sync-service",
+      {
+        "id": "reputation-sync-service",
+        "name": "reputation-sync-service",
+        "type": "reputation",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service"
+        ],
+        "dependents": [
+          "oddyssey-manager"
+        ],
+        "metadata": {
+          "name": "reputation-sync-service",
+          "type": "reputation",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Reputation synchronization service",
+          "endpoints": [
+            "/api/reputation"
+          ],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.852Z",
+          "updatedAt": "2025-10-11T10:44:48.852Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "results-fetcher-service",
+      {
+        "id": "results-fetcher-service",
+        "name": "results-fetcher-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "results-fetcher-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.013Z",
+          "updatedAt": "2025-10-11T10:40:52.013Z",
+          "discoveredAt": "2025-10-11T10:40:52.013Z"
+        }
+      }
+    ],
+    [
+      "schema-sync-bridge",
+      {
+        "id": "schema-sync-bridge",
+        "name": "schema-sync-bridge",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "schema-sync-bridge",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.017Z",
+          "updatedAt": "2025-10-11T10:40:52.017Z",
+          "discoveredAt": "2025-10-11T10:40:52.017Z"
+        }
+      }
+    ],
+    [
+      "shared-query-service",
+      {
+        "id": "shared-query-service",
+        "name": "shared-query-service",
+        "type": "database",
+        "status": "registered",
+        "dependencies": [],
+        "dependents": [
+          "unified-pool-settlement-system",
+          "enhanced-analytics-service",
+          "optimized-leaderboard-service",
+          "reputation-sync-service",
+          "oddyssey-manager",
+          "guided-market-service",
+          "database-optimization-service",
+          "system-monitor"
+        ],
+        "metadata": {
+          "name": "shared-query-service",
+          "type": "database",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Shared database query service",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:44:48.846Z",
+          "updatedAt": "2025-10-11T10:56:45.862Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "simple-bulletproof-service",
+      {
+        "id": "simple-bulletproof-service",
+        "name": "simple-bulletproof-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "simple-bulletproof-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.021Z",
+          "updatedAt": "2025-10-11T10:40:52.021Z",
+          "discoveredAt": "2025-10-11T10:40:52.020Z"
+        }
+      }
+    ],
+    [
+      "sportmonks",
+      {
+        "id": "sportmonks",
+        "name": "sportmonks",
+        "type": "external",
+        "status": "registered",
+        "dependencies": [],
+        "dependents": [
+          "guided-market-service"
+        ],
+        "metadata": {
+          "name": "sportmonks",
+          "type": "external",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "SportMonks API integration service",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.854Z",
+          "updatedAt": "2025-10-11T10:44:48.854Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "startup-initializer",
+      {
+        "id": "startup-initializer",
+        "name": "startup-initializer",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "startup-initializer",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.036Z",
+          "updatedAt": "2025-10-11T10:40:52.036Z",
+          "discoveredAt": "2025-10-11T10:40:52.036Z"
+        }
+      }
+    ],
+    [
+      "system-monitor",
+      {
+        "id": "system-monitor",
+        "name": "system-monitor",
+        "type": "monitoring",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "system-monitor",
+          "type": "monitoring",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "System health monitoring service",
+          "endpoints": [
+            "/api/health"
+          ],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:44:48.843Z",
+          "updatedAt": "2025-10-11T10:56:45.870Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "unified-evaluation-service",
+      {
+        "id": "unified-evaluation-service",
+        "name": "unified-evaluation-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "unified-evaluation-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.049Z",
+          "updatedAt": "2025-10-11T10:40:52.049Z",
+          "discoveredAt": "2025-10-11T10:40:52.049Z"
+        }
+      }
+    ],
+    [
+      "unified-pool-settlement-system",
+      {
+        "id": "unified-pool-settlement-system",
+        "name": "unified-pool-settlement-system",
+        "type": "settlement",
+        "status": "registered",
+        "dependencies": [
+          "event-driven-pool-sync",
+          "shared-query-service"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "unified-pool-settlement-system",
+          "type": "settlement",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Unified pool settlement system",
+          "endpoints": [
+            "/api/pools/settle"
+          ],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:44:48.840Z",
+          "updatedAt": "2025-10-11T10:56:45.866Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "unified-results-manager",
+      {
+        "id": "unified-results-manager",
+        "name": "unified-results-manager",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "unified-results-manager",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.052Z",
+          "updatedAt": "2025-10-11T10:40:52.052Z",
+          "discoveredAt": "2025-10-11T10:40:52.052Z"
+        }
+      }
+    ],
+    [
+      "unified-slip-service",
+      {
+        "id": "unified-slip-service",
+        "name": "unified-slip-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "unified-slip-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.053Z",
+          "updatedAt": "2025-10-11T10:40:52.053Z",
+          "discoveredAt": "2025-10-11T10:40:52.053Z"
+        }
+      }
+    ],
+    [
+      "web3-service-readonly",
+      {
+        "id": "web3-service-readonly",
+        "name": "web3-service-readonly",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "web3-service-readonly",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.054Z",
+          "updatedAt": "2025-10-11T10:40:52.054Z",
+          "discoveredAt": "2025-10-11T10:40:52.054Z"
+        }
+      }
+    ],
+    [
+      "web3-service",
+      {
+        "id": "web3-service",
+        "name": "web3-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "web3-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": true,
+          "createdAt": "2025-10-11T10:40:52.054Z",
+          "updatedAt": "2025-10-11T10:56:45.860Z",
+          "discoveredAt": "2025-10-11T10:40:52.054Z",
+          "critical": true
+        }
+      }
+    ],
+    [
+      "websocket-service",
+      {
+        "id": "websocket-service",
+        "name": "websocket-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "websocket-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:40:52.055Z",
+          "updatedAt": "2025-10-11T10:40:52.055Z",
+          "discoveredAt": "2025-10-11T10:40:52.055Z"
+        }
+      }
+    ],
+    [
+      "optimized-leaderboard-service",
+      {
+        "id": "optimized-leaderboard-service",
+        "name": "optimized-leaderboard-service",
+        "type": "leaderboard",
+        "status": "registered",
+        "dependencies": [
+          "shared-query-service",
+          "enhanced-analytics-service"
+        ],
+        "dependents": [],
+        "metadata": {
+          "name": "optimized-leaderboard-service",
+          "type": "leaderboard",
+          "status": "registered",
+          "version": "1.0.0",
+          "description": "Optimized leaderboard service",
+          "endpoints": [
+            "/api/leaderboards"
+          ],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T10:44:48.851Z",
+          "updatedAt": "2025-10-11T10:44:48.851Z",
+          "critical": false
+        }
+      }
+    ],
+    [
+      "comprehensive-health-service",
+      {
+        "id": "comprehensive-health-service",
+        "name": "comprehensive-health-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "comprehensive-health-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T16:03:45.945Z",
+          "updatedAt": "2025-10-11T16:03:45.945Z",
+          "discoveredAt": "2025-10-11T16:03:45.945Z"
+        }
+      }
+    ],
+    [
+      "cycle-monitor",
+      {
+        "id": "cycle-monitor",
+        "name": "cycle-monitor",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "cycle-monitor",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T16:03:45.967Z",
+          "updatedAt": "2025-10-11T16:03:45.967Z",
+          "discoveredAt": "2025-10-11T16:03:45.967Z"
+        }
+      }
+    ],
+    [
+      "monitoring-alerting-system",
+      {
+        "id": "monitoring-alerting-system",
+        "name": "monitoring-alerting-system",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "monitoring-alerting-system",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-11T16:03:45.968Z",
+          "updatedAt": "2025-10-11T16:03:45.968Z",
+          "discoveredAt": "2025-10-11T16:03:45.968Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-analytics-cache",
+      {
+        "id": "oddyssey-analytics-cache",
+        "name": "oddyssey-analytics-cache",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-analytics-cache",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-14T10:58:32.410Z",
+          "updatedAt": "2025-10-14T10:58:32.410Z",
+          "discoveredAt": "2025-10-14T10:58:32.410Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-database-optimizer",
+      {
+        "id": "oddyssey-database-optimizer",
+        "name": "oddyssey-database-optimizer",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-database-optimizer",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-14T10:58:32.520Z",
+          "updatedAt": "2025-10-14T10:58:32.520Z",
+          "discoveredAt": "2025-10-14T10:58:32.520Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-smart-analytics",
+      {
+        "id": "oddyssey-smart-analytics",
+        "name": "oddyssey-smart-analytics",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-smart-analytics",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-14T10:58:32.522Z",
+          "updatedAt": "2025-10-14T10:58:32.522Z",
+          "discoveredAt": "2025-10-14T10:58:32.522Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-unified-analytics",
+      {
+        "id": "oddyssey-unified-analytics",
+        "name": "oddyssey-unified-analytics",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-unified-analytics",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-14T10:58:32.534Z",
+          "updatedAt": "2025-10-14T10:58:32.534Z",
+          "discoveredAt": "2025-10-14T10:58:32.534Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-auto-evaluation-service",
+      {
+        "id": "oddyssey-auto-evaluation-service",
+        "name": "oddyssey-auto-evaluation-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-auto-evaluation-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-18T19:56:41.347Z",
+          "updatedAt": "2025-10-18T19:56:41.347Z",
+          "discoveredAt": "2025-10-18T19:56:41.347Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-oracle-fix-service",
+      {
+        "id": "oddyssey-oracle-fix-service",
+        "name": "oddyssey-oracle-fix-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-oracle-fix-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-18T19:56:41.379Z",
+          "updatedAt": "2025-10-18T19:56:41.379Z",
+          "discoveredAt": "2025-10-18T19:56:41.379Z"
+        }
+      }
+    ],
+    [
+      "auto-refund-service",
+      {
+        "id": "auto-refund-service",
+        "name": "auto-refund-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "auto-refund-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-22T23:33:19.263Z",
+          "updatedAt": "2025-10-22T23:33:19.263Z",
+          "discoveredAt": "2025-10-22T23:33:19.263Z"
+        }
+      }
+    ],
+    [
+      "unified-slip-evaluation-service",
+      {
+        "id": "unified-slip-evaluation-service",
+        "name": "unified-slip-evaluation-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "unified-slip-evaluation-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-22T23:33:19.310Z",
+          "updatedAt": "2025-10-22T23:33:19.310Z",
+          "discoveredAt": "2025-10-22T23:33:19.310Z"
+        }
+      }
+    ],
+    [
+      "oddyssey-reputation-integration",
+      {
+        "id": "oddyssey-reputation-integration",
+        "name": "oddyssey-reputation-integration",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "oddyssey-reputation-integration",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-27T14:30:24.558Z",
+          "updatedAt": "2025-10-27T14:30:24.558Z",
+          "discoveredAt": "2025-10-27T14:30:24.558Z"
+        }
+      }
+    ],
+    [
+      "pool-reputation-integration",
+      {
+        "id": "pool-reputation-integration",
+        "name": "pool-reputation-integration",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "pool-reputation-integration",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-27T14:30:24.599Z",
+          "updatedAt": "2025-10-27T14:30:24.599Z",
+          "discoveredAt": "2025-10-27T14:30:24.599Z"
+        }
+      }
+    ],
+    [
+      "reputation-contract-integration",
+      {
+        "id": "reputation-contract-integration",
+        "name": "reputation-contract-integration",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "reputation-contract-integration",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-10-27T14:30:24.602Z",
+          "updatedAt": "2025-10-27T14:30:24.602Z",
+          "discoveredAt": "2025-10-27T14:30:24.602Z"
+        }
+      }
+    ],
+    [
+      "notification-service",
+      {
+        "id": "notification-service",
+        "name": "notification-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "notification-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-11-04T19:39:52.066Z",
+          "updatedAt": "2025-11-04T19:39:52.066Z",
+          "discoveredAt": "2025-11-04T19:39:52.066Z"
+        }
+      }
+    ],
+    [
+      "pool-leaderboard-service",
+      {
+        "id": "pool-leaderboard-service",
+        "name": "pool-leaderboard-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "pool-leaderboard-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-11-04T19:39:52.107Z",
+          "updatedAt": "2025-11-04T19:39:52.107Z",
+          "discoveredAt": "2025-11-04T19:39:52.107Z"
+        }
+      }
+    ],
+    [
+      "portfolio-service",
+      {
+        "id": "portfolio-service",
+        "name": "portfolio-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "portfolio-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-11-04T19:39:52.109Z",
+          "updatedAt": "2025-11-04T19:39:52.109Z",
+          "discoveredAt": "2025-11-04T19:39:52.109Z"
+        }
+      }
+    ],
+    [
+      "somnia-data-streams-service",
+      {
+        "id": "somnia-data-streams-service",
+        "name": "somnia-data-streams-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "somnia-data-streams-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-11-12T08:15:45.565Z",
+          "updatedAt": "2025-11-12T08:15:45.565Z",
+          "discoveredAt": "2025-11-12T08:15:45.565Z"
+        }
+      }
+    ],
+    [
+      "pdf-service",
+      {
+        "id": "pdf-service",
+        "name": "pdf-service",
+        "type": "discovered",
+        "status": "unknown",
+        "dependencies": [],
+        "dependents": [],
+        "metadata": {
+          "name": "pdf-service",
+          "type": "discovered",
+          "status": "unknown",
+          "version": "1.0.0",
+          "description": "",
+          "endpoints": [],
+          "dependencies": [],
+          "healthCheck": null,
+          "createdAt": "2025-11-22T20:00:48.784Z",
+          "updatedAt": "2025-11-22T20:00:48.784Z",
+          "discoveredAt": "2025-11-22T20:00:48.784Z"
+        }
+      }
+    ]
+  ],
+  "circularDependencies": [],
+  "startupOrder": [
+    "pdf-service",
+    "somnia-data-streams-service",
+    "portfolio-service",
+    "pool-leaderboard-service",
+    "notification-service",
+    "reputation-contract-integration",
+    "pool-reputation-integration",
+    "oddyssey-reputation-integration",
+    "unified-slip-evaluation-service",
+    "auto-refund-service",
+    "oddyssey-oracle-fix-service",
+    "oddyssey-auto-evaluation-service",
+    "oddyssey-unified-analytics",
+    "oddyssey-smart-analytics",
+    "oddyssey-database-optimizer",
+    "oddyssey-analytics-cache",
+    "monitoring-alerting-system",
+    "cycle-monitor",
+    "comprehensive-health-service",
+    "optimized-leaderboard-service",
+    "websocket-service",
+    "web3-service",
+    "web3-service-readonly",
+    "unified-slip-service",
+    "unified-results-manager",
+    "unified-pool-settlement-system",
+    "unified-evaluation-service",
+    "system-monitor",
+    "startup-initializer",
+    "simple-bulletproof-service",
+    "schema-sync-bridge",
+    "results-fetcher-service",
+    "reputation-event-indexer",
+    "reputation-decay-service",
+    "persistent-daily-game-manager",
+    "oddyssey-results-resolver",
+    "oddyssey-oracle-bot",
+    "oddyssey-match-selector",
+    "oddyssey-manager",
+    "reputation-sync-service",
+    "leaderboard-service",
+    "leaderboard-cron-service",
+    "guided-market-service",
+    "sportmonks",
+    "football-oracle-bot",
+    "fixture-mapping-maintainer",
+    "event-driven-slip-sync",
+    "event-driven-pool-sync",
+    "event-driven-bet-sync",
+    "enhanced-health-monitoring",
+    "service-registry",
+    "enhanced-analytics-service",
+    "enhanced-airdrop-service",
+    "dependency-graph-service",
+    "database-optimization-service",
+    "shared-query-service",
+    "daily-stats-service",
+    "cycle-format-normalizer",
+    "crypto-oracle-bot",
+    "cron-coordinator",
+    "continuous-slip-evaluator",
+    "coinpaprika",
+    "auto-evaluation-trigger",
+    "alert-handler",
+    "airdrop-indexer"
+  ],
+  "lastUpdated": "2025-11-23T21:19:21.618Z"
+}
