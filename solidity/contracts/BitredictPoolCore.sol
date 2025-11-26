@@ -235,7 +235,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
         uint256 totalRequired = adjustedCreationFee + _creatorStake;
         if (_useBitr) {
             require(msg.value == 0);
-            require(bitrToken.transferFrom(msg.sender, address(this), totalRequired));
+            require(bitrToken.transferFrom(msg.sender, address(this), totalRequired), "BITR transfer failed");
             require(bitrToken.transfer(feeCollector, adjustedCreationFee), "Fee transfer failed");
         } else {
             require(msg.value == totalRequired);
@@ -329,7 +329,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
             emit ReputationActionOccurred(pool.creator, ReputationSystem.ReputationAction.POOL_FILLED_ABOVE_60, poolPtr.totalBettorStake, bytes32(poolId), block.timestamp);
         }
         if (_poolUsesBitr(poolId)) {
-            require(bitrToken.transferFrom(msg.sender, address(this), amount));
+            require(bitrToken.transferFrom(msg.sender, address(this), amount), "BITR transfer failed");
         } else {
             require(msg.value == amount);
         }
@@ -359,7 +359,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
         uint256 denominator = uint256(pool.odds) - 100;
         pool.maxBettorStake = (effectiveCreatorSideStake * 100) / denominator;
         if (_poolUsesBitr(poolId)) {
-            require(bitrToken.transferFrom(msg.sender, address(this), amount));
+            require(bitrToken.transferFrom(msg.sender, address(this), amount), "BITR transfer failed");
         } else {
             require(msg.value == amount);
         }
@@ -423,7 +423,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
         pool.flags |= 1; 
         pool.result = bytes32(0); 
         if (_poolUsesBitr(poolId)) {
-            require(bitrToken.transfer(pool.creator, pool.creatorStake));
+            require(bitrToken.transfer(pool.creator, pool.creatorStake), "Creator refund failed");
         } else {
             (bool success, ) = payable(pool.creator).call{value: pool.creatorStake, gas: 2300}("");
             require(success);
@@ -634,7 +634,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
         _updateStreakInternal(msg.sender, userWon);
         
         if (_poolUsesBitr(poolId)) {
-            require(bitrToken.transfer(msg.sender, payout));
+            require(bitrToken.transfer(msg.sender, payout), "Payout transfer failed");
         } else {
             (bool success, ) = payable(msg.sender).call{value: payout, gas: 2300}("");
             require(success);
@@ -730,7 +730,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
             uint256 stake = lpStakes[poolId][lp];
             if (stake > 0) {
                 if (useBitr) {
-                    require(bitrToken.transfer(lp, stake));
+                    require(bitrToken.transfer(lp, stake), "LP refund failed");
                 } else {
                     (bool success, ) = payable(lp).call{value: stake, gas: 2300}("");
                     require(success);
@@ -745,7 +745,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
             uint256 stake = bettorStakes[poolId][bettor];
             if (stake > 0) {
                 if (useBitr) {
-                    require(bitrToken.transfer(bettor, stake));
+                    require(bitrToken.transfer(bettor, stake), "Bettor refund failed");
                 } else {
                     (bool success, ) = payable(bettor).call{value: stake, gas: 2300}("");
                     require(success);
@@ -801,7 +801,7 @@ contract BitredictPoolCore is Ownable, ReentrancyGuard {
             if (stake > 0 && !claimed[poolId][bettor]) {
                 claimed[poolId][bettor] = true; 
                 if (useBitr) {
-                    require(bitrToken.transfer(bettor, stake));
+                    require(bitrToken.transfer(bettor, stake), "Bettor refund failed");
                 } else {
                     (bool success, ) = payable(bettor).call{value: stake, gas: 2300}("");
                     require(success);

@@ -420,12 +420,12 @@ contract BitredictPoolFactory is Ownable, ReentrancyGuard {
         uint256 bitrBalance = bitrToken.balanceOf(address(this));
         
         if (sttBalance > 0) {
-            (bool success, ) = payable(owner()).call{value: sttBalance}("");
+            (bool success, ) = payable(owner()).call{value: sttBalance, gas: 2300}("");
             require(success, "STT withdrawal failed");
         }
         
         if (bitrBalance > 0) {
-            bitrToken.transfer(owner(), bitrBalance);
+            require(bitrToken.transfer(owner(), bitrBalance), "BITR withdrawal failed");
         }
     }
 

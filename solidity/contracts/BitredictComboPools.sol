@@ -449,7 +449,7 @@ contract BitredictComboPools is Ownable, ReentrancyGuard {
         if (_comboPoolUsesBitr(comboPoolId)) {
             require(bitrToken.transfer(msg.sender, payout), "BITR payout failed");
         } else {
-            (bool success, ) = payable(msg.sender).call{value: payout}("");
+            (bool success, ) = payable(msg.sender).call{value: payout, gas: 2300}("");
             require(success, "STT payout failed");
         }
         
@@ -474,7 +474,7 @@ contract BitredictComboPools is Ownable, ReentrancyGuard {
                 if (_comboPoolUsesBitr(comboPoolId)) {
                     require(bitrToken.transfer(lp, stake), "BITR LP refund failed");
                 } else {
-                    (bool success, ) = payable(lp).call{value: stake}("");
+                    (bool success, ) = payable(lp).call{value: stake, gas: 2300}("");
                     require(success, "STT LP refund failed");
                 }
             }
@@ -489,7 +489,7 @@ contract BitredictComboPools is Ownable, ReentrancyGuard {
                 if (_comboPoolUsesBitr(comboPoolId)) {
                     require(bitrToken.transfer(bettor, stake), "BITR bettor refund failed");
                 } else {
-                    (bool success, ) = payable(bettor).call{value: stake}("");
+                    (bool success, ) = payable(bettor).call{value: stake, gas: 2300}("");
                     require(success, "STT bettor refund failed");
                 }
             }
@@ -651,17 +651,18 @@ contract BitredictComboPools is Ownable, ReentrancyGuard {
         if (_stt > 0) {
             uint256 sttStakers = (_stt * 30) / 100;
             totalCollectedSTT = 0;
-            (bool success1, ) = payable(feeCollector).call{value: _stt - sttStakers}("");
+            (bool success1, ) = payable(feeCollector).call{value: _stt - sttStakers, gas: 2300}("");
             require(success1, "STT fee collector transfer failed");
-            (bool success2, ) = payable(stakingContract).call{value: sttStakers}("");
+            (bool success2, ) = payable(stakingContract).call{value: sttStakers, gas: 2300}("");
             require(success2, "STT staking transfer failed");
         }
         
         if (_bitr > 0) {
             uint256 bitrStakers = (_bitr * 30) / 100;
+            uint256 bitrFeeCollector = _bitr - bitrStakers;
             totalCollectedBITR = 0;
-            bitrToken.transfer(feeCollector, _bitr - bitrStakers);
-            bitrToken.transfer(stakingContract, bitrStakers);
+            require(bitrToken.transfer(feeCollector, bitrFeeCollector), "FeeCollector BITR transfer failed");
+            require(bitrToken.transfer(stakingContract, bitrStakers), "Staking contract BITR transfer failed");
         }
     }
 

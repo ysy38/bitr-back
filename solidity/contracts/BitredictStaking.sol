@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -7,23 +7,22 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract BitredictStaking is Ownable, ReentrancyGuard {
     IERC20 public bitrToken;
-    // STT is native coin, not ERC20
 
     uint256 private constant REWARD_PRECISION = 1e18;
     uint256 private constant SECONDS_PER_YEAR = 365 days;
     uint256 private constant BASIS_POINTS = 10000;
 
     struct Tier {
-        uint256 baseAPY; // in basis points (1000 = 10%)
+        uint256 baseAPY;
         uint256 minStake;
-        uint256 revenueShareRate; // in basis points (1000 = 10%)
+        uint256 revenueShareRate;
     }
 
     struct Stake {
         uint256 amount;
         uint256 startTime;
         uint8 tierId;
-        uint8 durationOption; // 0 = 3d, 1 = 5d, 2 = 7d (testnet)
+        uint8 durationOption;
         uint256 claimedRewardBITR;
         uint256 rewardDebtBITR;
         uint256 rewardDebtSTT;
@@ -32,8 +31,8 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
     mapping(address => Stake[]) public userStakes;
     Tier[] public tiers;
 
-    uint256[] public durationBonuses = [0, 200, 400]; // +0%, +2%, +4%
-    uint256[] public durations = [3 days, 5 days, 7 days]; // Testnet periods
+    uint256[] public durationBonuses = [0, 200, 400];
+    uint256[] public durations = [3 days, 5 days, 7 days];
 
     uint256 public lastRevenueDistribution;
     uint256 public distributionInterval = 30 days;
@@ -48,10 +47,8 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
     mapping(address => uint256) public pendingRevenueBITR;
     mapping(address => uint256) public pendingRevenueSTT;
 
-    // Integration with BitredictPool
     mapping(address => bool) public authorizedPools;
     
-    // Total statistics
     uint256 public totalStaked;
     uint256 public totalRewardsPaid;
     uint256 public totalRevenuePaid;
@@ -68,9 +65,9 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
         require(_bitr != address(0), "Invalid BITR address");
         bitrToken = IERC20(_bitr);
         lastRevenueDistribution = block.timestamp;
-        tiers.push(Tier({ baseAPY: 600, minStake: 1000 ether, revenueShareRate: 1000 })); // 6% APY, 10% revenue
-        tiers.push(Tier({ baseAPY: 1200, minStake: 3000 ether, revenueShareRate: 3000 })); // 12% APY, 30% revenue
-        tiers.push(Tier({ baseAPY: 1800, minStake: 10000 ether, revenueShareRate: 6000 })); // 18% APY, 60% revenue
+        tiers.push(Tier({ baseAPY: 600, minStake: 1000 ether, revenueShareRate: 1000 }));
+        tiers.push(Tier({ baseAPY: 1200, minStake: 3000 ether, revenueShareRate: 3000 }));
+        tiers.push(Tier({ baseAPY: 1800, minStake: 10000 ether, revenueShareRate: 6000 }));
     }
 
     modifier validStakeIndex(address _user, uint256 _index) {
@@ -94,7 +91,6 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
         emit PoolAuthorized(_pool, _authorized);
     }
 
-    // Accepts BITR as ERC20, STT as native coin
     function addRevenueFromPool(uint256 _bitrAmount) external payable {
         require(authorizedPools[msg.sender], "Unauthorized pool");
         _addRevenue(_bitrAmount, msg.value);
@@ -106,7 +102,7 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
 
     function _addRevenue(uint256 _bitrAmount, uint256 _sttAmount) internal {
         if (_bitrAmount > 0) {
-            bitrToken.transferFrom(msg.sender, address(this), _bitrAmount);
+            require(bitrToken.transferFrom(msg.sender, address(this), _bitrAmount), "BITR transfer failed");
             revenuePoolBITR += _bitrAmount;
         }
         if (_sttAmount > 0) {
@@ -117,7 +113,7 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
 
     function fundAPYRewards(uint256 _amount) external onlyOwner {
         require(_amount > 0, "Amount must be greater than 0");
-        bitrToken.transferFrom(msg.sender, address(this), _amount);
+        require(bitrToken.transferFrom(msg.sender, address(this), _amount), "BITR transfer failed");
     }
 
     function distributeRevenue() public {
@@ -134,6 +130,9 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
         revenuePoolBITR = 0;
         revenuePoolSTT = 0;
 
+        uint256 distributedBITR = 0;
+        uint256 distributedSTT = 0;
+
         for (uint8 i = 0; i < tiers.length; i++) {
             uint256 totalStakedTier = totalStakedInTier[i];
             if (totalStakedTier == 0) {
@@ -144,11 +143,18 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
             uint256 tierRevenueBITR = (totalBITR * tierShare) / BASIS_POINTS;
             uint256 tierRevenueSTT = (totalSTT * tierShare) / BASIS_POINTS;
 
+            if (i == tiers.length - 1) {
+                tierRevenueBITR = totalBITR - distributedBITR;
+                tierRevenueSTT = totalSTT - distributedSTT;
+            }
+
             if (tierRevenueBITR > 0) {
                 accRewardPerShareBITR[i] += (tierRevenueBITR * REWARD_PRECISION) / totalStakedTier;
+                distributedBITR += tierRevenueBITR;
             }
             if (tierRevenueSTT > 0) {
                 accRewardPerShareSTT[i] += (tierRevenueSTT * REWARD_PRECISION) / totalStakedTier;
+                distributedSTT += tierRevenueSTT;
             }
         }
 
@@ -190,12 +196,12 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
 
         if (bitrAmount > 0) {
             require(bitrToken.balanceOf(address(this)) >= bitrAmount, "Insufficient BITR balance");
-            bitrToken.transfer(msg.sender, bitrAmount);
+            require(bitrToken.transfer(msg.sender, bitrAmount), "BITR transfer failed");
             totalRevenuePaid += bitrAmount;
         }
         if (sttAmount > 0) {
             require(address(this).balance >= sttAmount, "Insufficient STT balance");
-            (bool success, ) = payable(msg.sender).call{value: sttAmount}("");
+            (bool success, ) = payable(msg.sender).call{value: sttAmount, gas: 2300}("");
             require(success, "STT transfer failed");
         }
 
@@ -212,7 +218,7 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
         Tier memory tier = tiers[_tierId];
         require(_amount >= tier.minStake, "Below tier minimum stake");
         _harvestRevenueRewards(msg.sender);
-        bitrToken.transferFrom(msg.sender, address(this), _amount);
+        require(bitrToken.transferFrom(msg.sender, address(this), _amount), "BITR transfer failed");
         userStakes[msg.sender].push(
             Stake({
                 amount: _amount,
@@ -255,7 +261,7 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
         if (bitrAmount > 0) {
             s.claimedRewardBITR += bitrAmount;
             require(bitrToken.balanceOf(address(this)) >= bitrAmount, "Insufficient contract balance");
-            bitrToken.transfer(_user, bitrAmount);
+            require(bitrToken.transfer(_user, bitrAmount), "BITR transfer failed");
             totalRewardsPaid += bitrAmount;
         }
         emit Claimed(_user, bitrAmount);
@@ -265,20 +271,18 @@ contract BitredictStaking is Ownable, ReentrancyGuard {
         _harvestRevenueRewards(msg.sender);
         Stake memory s = userStakes[msg.sender][_index];
         require(block.timestamp >= s.startTime + durations[s.durationOption], "Stake is locked");
-        _claim(msg.sender, _index); // auto-claim APY rewards
+        _claim(msg.sender, _index);
         uint256 unstakeAmount = s.amount;
         totalStakedInTier[s.tierId] -= unstakeAmount;
         totalStaked -= unstakeAmount;
-        // Remove stake using swap-and-pop
         Stake[] storage stakes = userStakes[msg.sender];
         stakes[_index] = stakes[stakes.length - 1];
         stakes.pop();
         require(bitrToken.balanceOf(address(this)) >= unstakeAmount, "Insufficient contract balance");
-        bitrToken.transfer(msg.sender, unstakeAmount);
+        require(bitrToken.transfer(msg.sender, unstakeAmount), "BITR transfer failed");
         emit Unstaked(msg.sender, unstakeAmount);
     }
 
-    // View functions for frontend integration
     function getUserStakes(address _user) external view returns (Stake[] memory) {
         return userStakes[_user];
     }

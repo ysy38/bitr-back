@@ -120,7 +120,7 @@ contract BitredictBoostSystem is Ownable {
         IBitredictPoolCore.Pool memory pool = poolCore.getPool(poolId);
         
         require(msg.sender == pool.creator, "Only creator can boost");
-        // TODO: Add eventStartTime check - need to get it from pool data
+        require(block.timestamp < pool.eventStartTime, "Event already started");
         
         // Check if tier has available slots
         uint256 maxForTier = _getMaxPoolsForTier(tier);
@@ -223,7 +223,7 @@ contract BitredictBoostSystem is Ownable {
         uint256 amount = address(this).balance;
         require(amount > 0, "No revenue to claim");
         
-        (bool success, ) = payable(revenueCollector).call{value: amount}("");
+        (bool success, ) = payable(revenueCollector).call{value: amount, gas: 2300}("");
         require(success, "Revenue transfer failed");
         
         emit BoostRevenueClaimed(revenueCollector, amount);
@@ -329,12 +329,11 @@ contract BitredictBoostSystem is Ownable {
             return (false, "Invalid boost tier");
         }
         
-        poolCore.getPool(poolId);
+        IBitredictPoolCore.Pool memory pool = poolCore.getPool(poolId);
         
-        // TODO: Add eventStartTime check - need to get it from pool data
-        // if (eventStartTime <= block.timestamp) {
-        //     return (false, "Event already started");
-        // }
+        if (block.timestamp >= pool.eventStartTime) {
+            return (false, "Event already started");
+        }
         
         uint256 maxForTier = _getMaxPoolsForTier(tier);
         if (activeBoostCount[tier] >= maxForTier) {
@@ -410,7 +409,7 @@ contract BitredictBoostSystem is Ownable {
         uint256 amount = address(this).balance;
         require(amount > 0, "No funds to withdraw");
         
-        (bool success, ) = payable(owner()).call{value: amount}("");
+        (bool success, ) = payable(owner()).call{value: amount, gas: 2300}("");
         require(success, "Emergency withdrawal failed");
     }
 
